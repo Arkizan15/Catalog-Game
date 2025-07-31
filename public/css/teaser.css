@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  padding: 20px;
+  background-color:linear-gradient(black to gray);
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.section {
+  background-color: #1a1a1a; /* abu-abu gelap */
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: white;
+}
+
+.section-header a {
+  color: gray;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.game-list {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.game-card {
+  width: 100px;
+  height: 140px;
+  border-radius: 10px;
+  background-color: #2e2e2e; /* abu-abu lebih terang untuk highlight */
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.game-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
