@@ -3,48 +3,50 @@
     padding: 0;
     box-sizing: border-box;
 }
-body, html {
-  margin: 0;
-dding: 0;
-            height: auto;
-            position: relative;
-}
-body::-webkit-scrollbar {
-  display: none;
 
-}
-body {
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
     font-family: 'Arial', sans-serif;
     color: white;
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 .landing-container {
     min-height: 100vh;
+    width: 100vw;
     background: transparent;
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
- .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
- 
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+}
 
 .hero {
     display: flex;
     align-items: center;
     min-height: 100vh;
     padding: 0 50px;
-    position: absolute;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content {
@@ -121,6 +123,7 @@ body {
     height: 100%;
     overflow: hidden;
     pointer-events: none;
+    z-index: 3;
 }
 
 .particle {
@@ -170,6 +173,7 @@ body {
         flex-direction: column;
         text-align: center;
         padding: 120px 25px 50px;
+        min-height: 100vh;
     }
 
     .hero-content {
@@ -192,6 +196,11 @@ body {
         width: 300px;
         height: 360px;
     }
+
+    .landing-container,
+    .background-image {
+        width: 100vw;
+    }
 }
 
 @media (max-width: 480px) {
@@ -210,5 +219,9 @@ body {
     .character-container {
         width: 250px;
         height: 300px;
+    }
+
+    .hero {
+        padding: 100px 20px 30px;
     }
 }
