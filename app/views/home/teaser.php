@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Interface</title>
-    <link rel="stylesheet" href="<?=BASEURL; ?>\css\teaser.css">
+    <link rel="stylesheet" href="<?=BASEURL;?>/css/teaser.css">
 </head>
 <body>
     <div class="section">
@@ -49,6 +49,6 @@
         </div>
     </div>
 
-    <script src="\js\script.js"></script>
+    <script src="<?=BASEURL;?>/js/script.js"></script>
 </body>
 </html>
