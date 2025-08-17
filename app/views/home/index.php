@@ -7,68 +7,7 @@
     <link rel="stylesheet" href="<?= BASEURL;?>/css/home.css">
     <link rel="stylesheet" href="<?= BASEURL;?>/css/teaser.css">
     <link rel="stylesheet" href="<?= BASEURL;?>/css/header.css">
-    <style>
-        /* Override teaser.css background for integration */
-        .teaser-section {
-            background: linear-gradient(135deg, #000000, #404040);
-            background-attachment: fixed;
-            padding: 60px 20px;
-            min-height: 100vh;
-            width: 100vw;
-            margin: 0;
-        }
-        
-        .teaser-section .section {
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 30px;
-        }
-        
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Navbar styling */
-        .navbar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 30px 50px;
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .nav-menu li {
-            position: relative;
-        }
-        
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            padding-bottom: 5px;
-        }
-        
-        .nav-menu a:hover {
-            color: #cccccc;
-        }
-        
-        .nav-menu .active a {
-            border-bottom: 2px solid white;
-        }
-    </style>
+    
 </head>
 <body>
     <!-- Landing Section -->
@@ -113,49 +52,49 @@
     </div>
 
     <!-- Teaser Section -->
-    <div class="teaser-section" id="products">
-        <div class="section">
-            <div class="section-header">
-                <h2>Most Liked</h2>
-                <a href="#">Show more</a>
-            </div>
-            <div class="game-list">
-                <div class="game-card featured">
-                    <div class="placeholder-image">Until Then</div>
-                </div>
-                <div class="game-card">
-                    <div class="placeholder-image">Game 2</div>
-                </div>
-                <div class="game-card">
-                    <div class="placeholder-image">Game 3</div>
-                </div>
-                <div class="game-card">
-                    <div class="placeholder-image">Game 4</div>
-                </div>
-            </div>
+     <div class="teaser-section" id="products">
+    <div class="section">
+      <div class="section-header">
+        <h2>Most Liked</h2>
+        <a href="#">Show more</a>
+      </div>
+      <div class="game-list">
+        <div class="game-card featured">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/hollow_knight.png" alt=""></div>
         </div>
-
-        <div class="section">
-            <div class="section-header">
-                <h2>Pixel Games</h2>
-                <a href="#">Show more</a>
-            </div>
-            <div class="game-list">
-                <div class="game-card">
-                    <div class="placeholder-image">Pixel Game 1</div>
-                </div>
-                <div class="game-card">
-                    <div class="placeholder-image">Pixel Game 2</div>
-                </div>
-                <div class="game-card">
-                    <div class="placeholder-image">Pixel Game 3</div>
-                </div>
-                <div class="game-card">
-                    <div class="placeholder-image">Pixel Game 4</div>
-                </div>
-            </div>
+        <div class="game-card">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/celeste.png" alt=""></div>
         </div>
+        <div class="game-card">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/tekken.webp" alt=""></div>
+        </div>
+        <div class="game-card">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/ASTFU.jpg" alt=""></div>
+        </div>
+      </div>
     </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Pixel Games</h2>
+        <a href="#">Show more</a>
+      </div>
+      <div class="game-list">
+        <div class="game-card">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/ASTFU.jpg" alt=""></div>
+        </div>
+        <div class="game-card">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/until_then.jpg" alt=""></div>
+        </div>
+        <div class="game-card">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/omori.jpg" alt=""></div>
+        </div>
+        <div class="game-card">
+          <div class="placeholder-image"><img src="<?=BASEURL;?>/img/minecraft.jpg" alt=""></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <script src="<?= BASEURL;?>/js/teaser.js"></script>
 </body>

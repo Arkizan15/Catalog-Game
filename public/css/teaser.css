@@ -1,136 +1,178 @@
-/* Remove global body styles to prevent conflict */
+/* Global reset */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+      background: linear-gradient(135deg, #000000, #404040);
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+/* Teaser Section */
 .teaser-section {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    padding: 20px;
-    box-sizing: border-box;
+  background: linear-gradient(135deg, #000000, #404040);
+  background-attachment: fixed;
+  padding: 60px 20px;
+  
+  width: 100vw;
+  margin: 0;
+  box-sizing: border-box;
 }
 
+/* Section container */
 .section {
-    background: rgba(26, 26, 26, 0.9);
-    border-radius: 15px;
-    margin-bottom: 30px;
-    padding: 25px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: rgba(26, 26, 26, 0.9);
+  border-radius: 15px;
+  margin-bottom: 30px;
+  padding: 25px;
+  height: 500px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 1200px; /* cukup untuk 4 card besar */
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Section header */
 .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .section-header h2 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
-    color: white;
-    letter-spacing: -0.5px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: -0.5px;
 }
 
 .section-header a {
-    color: #888888;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
 }
 
 .section-header a:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 
+/* Game grid */
 .game-list {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.game-list::-webkit-scrollbar {
-    height: 6px;
-}
-
-.game-list::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-}
-
-.game-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 card pas */
+  gap: 20px;
 }
 
 .game-card {
-    width: 120px;
-    height: 160px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #2e2e2e, #1a1a1a);
-    flex: 0 0 auto;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  width: 95%;  height: 95%; /* card besar */
+  border-radius: 12px;
+  background: linear-gradient(145deg, #2e2e2e, #1a1a1a);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .game-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
 }
 
 .game-card:hover img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
+/* Placeholder */
 .placeholder-image {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #333333, #555555);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #888888;
-    font-size: 12px;
-    text-align: center;
-    border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #333333, #555555);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888888;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 12px;
 }
 
-/* Featured game styling for the first card */
+/* Featured game */
 .game-card.featured {
-    background: linear-gradient(145deg, #4a4a4a, #2a2a2a);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(145deg, #4a4a4a, #2a2a2a);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .game-card.featured:hover {
-    border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .teaser-section {
-        padding: 15px;
-    }
-    
-    .section {
-        padding: 20px;
-    }
-    
-    .section-header h2 {
-        font-size: 20px;
-    }
-    
-    .game-card {
-        width: 100px;
-        height: 140px;
-    }
+/* Navbar */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 30px 50px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  padding-bottom: 5px;
+}
+
+.nav-menu a:hover {
+  color: #cccccc;
+}
+
+.nav-menu .active a {
+  border-bottom: 2px solid white;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .game-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .game-card {
+    height: 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  .game-list {
+    grid-template-columns: 1fr;
+  }
+  .game-card {
+    height: 220px;
+  }
 }
