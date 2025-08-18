@@ -6,6 +6,7 @@ class Home extends Controller {
         $data['nama'] = $this->model('User_model')->getUser();
         $this->view('templates/navbar', $data);
         $this->view('home/index', $data);
+        $this->view('templates/footer', $data);
        
         
 

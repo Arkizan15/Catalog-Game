@@ -15,14 +15,7 @@
         <img src="<?= BASEURL;?>/img/hollow-knight-bg.jpg" alt="Background" class="background-image">
 
         <!-- Navbar -->
-        <nav class="navbar">
-            <ul class="nav-menu">
-                <li class="active"><a href="#home">Home</a></li>
-                <li><a href="#games">Games</a></li>
-                <li><a href="#saved">Saved</a></li>
-            </ul>
-        </nav>
-
+        
         <section class="hero">
             <div class="hero-content">
                 <h1 class="hero-title">Kiki's Catalog Game</h1>
