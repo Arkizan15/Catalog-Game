@@ -10,7 +10,7 @@
             <ul class="nav-menu">
                 <li><a href="<?=BASEURL;?>">Home</a></li>
                 <li><a href="<?=BASEURL;?>/catalog">Games</a></li>
-                <li><a href="#saved">Saved</a></li>
+                <li><a href="<?=BASEURL;?>">Saved</a></li>
             </ul>
         </nav>
 
