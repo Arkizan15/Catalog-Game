@@ -52,7 +52,7 @@
         <a href="#">Show more</a>
       </div>
       <div class="game-list">
-        <div class="game-card featured">
+        <div class="game-card">
           <div class="placeholder-image"><img src="<?=BASEURL;?>/img/hollow_knight.png" alt=""></div>
         </div>
         <div class="game-card">

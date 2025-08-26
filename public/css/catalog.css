@@ -3,7 +3,7 @@ html {
 }
 
 body {
-      background: linear-gradient(135deg, #000000, #404040);
+  background: linear-gradient(135deg, #000000, #bfbfbf);
   background-attachment: fixed;
   margin: 0;
   padding: 0;
@@ -100,6 +100,91 @@ body::-webkit-scrollbar {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
+/* Modal Styles */
+.modal-content {
+  background: linear-gradient(135deg, #1a1a1a, #2e2e2e) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.game-info h6 {
+  color: #4dabf7 !important;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+.game-info p {
+  color: #e9ecef;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+#gameDescription {
+  text-align: justify;
+  line-height: 1.7;
+  color: #f8f9fa;
+}
+
+#gameImage {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #218838, #1ba085);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #6c757d, #5a6268);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #5a6268, #495057);
+  transform: translateY(-1px);
+}
+
+.btn-close-white:hover {
+  filter: brightness(0.8);
+}
+
+/* Animation untuk modal */
+.modal.fade .modal-dialog {
+  transform: scale(0.8);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+}
+
 /* Navbar */
 .navbar {
   position: absolute;
@@ -147,6 +232,10 @@ body::-webkit-scrollbar {
   .game-card {
     height: 250px;
   }
+  
+  .modal-dialog {
+    margin: 1rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -155,5 +244,19 @@ body::-webkit-scrollbar {
   }
   .game-card {
     height: 220px;
+  }
+  
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+  
+  .modal-body .row {
+    flex-direction: column;
+  }
+  
+  .modal-body .col-md-4,
+  .modal-body .col-md-8 {
+    max-width: 100%;
+    margin-bottom: 1rem;
   }
 }
