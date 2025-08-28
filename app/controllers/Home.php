@@ -1,16 +1,23 @@
 <?php
 
 class Home extends Controller {
-    public function index(){
-        $auth = new Auth();
-        $auth->checkAuth();
+    
+    public function index() {
+        // Cek apakah user sudah login
+        if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+            header('Location: ' . BASEURL . 'auth');
+            exit();
+        }
         
-        $data['judul'] = 'Home';
-        $data['nama'] = $this->model('User_model')->getUser();
-        $data['user'] = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
+        $data['judul'] = 'Dashboard';
+        $data['username'] = $_SESSION['username'] ?? 'User';
         
-        $this->view('templates/navbar', $data);
         $this->view('home/index', $data);
-        $this->view('templates/footer', $data);
+    }
+    
+    public function logout() {
+        session_destroy();
+        header('Location: ' . BASEURL . 'auth');
+        exit();
     }
 }

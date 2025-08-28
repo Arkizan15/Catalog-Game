@@ -11,7 +11,7 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
-            overflow: hidden; /* hilangkan scroll */
+            overflow: hidden;
         }
 
         .background-particles {
@@ -40,16 +40,16 @@
         .register-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 25px 30px; /* lebih kecil biar muat */
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            width: 350px; /* diperkecil */
+            width: 420px;
             position: relative;
             z-index: 2;
         }
 
         .brand-title {
-            font-size: 22px;
+            font-size: 26px;
             font-weight: bold;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -57,26 +57,22 @@
         }
 
         .form-title {
-            font-size: 20px;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            font-size: 14px;
+            padding: 10px;
             margin-bottom: 15px;
         }
 
-        input {
-            font-size: 14px !important;
-        }
-
-        .btn {
-            font-size: 14px;
-            padding: 8px 12px;
-        }
-
         .password-requirements {
-            font-size: 11px;
-            margin-bottom: 10px;
-            padding: 8px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            padding: 10px;
         }
 
-        /* particle random posisi */
         .particle {
             top: calc(100% * var(--rand));
             left: calc(100% * var(--rand));
@@ -92,35 +88,49 @@
         <div class="particle" style="--rand:0.9;"></div>
     </div>
 
-    <!-- pakai bootstrap flex agar pas tengah -->
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="register-container">
-            <div class="text-center mb-3">
+            <div class="text-center mb-4">
                 <h1 class="brand-title">Kiki's Catalog Game</h1>
+                <p class="text-muted">Bergabunglah dengan komunitas gamer</p>
             </div>
 
             <h2 class="form-title text-center">Daftar Akun</h2>
 
-            <form>
+            <?php if (!empty($data['error'])): ?>
+                <div class="alert alert-danger">
+                    <?= htmlspecialchars($data['error']); ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST" action="<?= BASEURL; ?>auth/register">
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Pilih username unik">
+                    <input type="text" name="username" class="form-control" placeholder="Pilih username unik" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control form-control-sm" placeholder="Min. 6 karakter">
+                    <input type="password" name="password" class="form-control" placeholder="Min. 6 karakter" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Konfirmasi Password</label>
-                    <input type="password" class="form-control form-control-sm" placeholder="Ulangi password">
+                    <input type="password" name="confirm_password" class="form-control" placeholder="Ulangi password" required>
                 </div>
 
-                
+                <div class="password-requirements bg-light rounded">
+                    <b>Persyaratan:</b>
+                    <ul class="mb-0">
+                        <li>Username 3-50 karakter (huruf, angka, underscore)</li>
+                        <li>Password minimal 6 karakter</li>
+                        <li>Konfirmasi password harus sama</li>
+                    </ul>
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100">Daftar Sekarang</button>
             </form>
 
             <div class="text-center mt-3">
-                <small>Sudah punya akun? <a href="<?= BASEURL; ?>\auth\login.php">Login</a></small>
+                <small>Sudah punya akun? <a href="<?= BASEURL; ?>auth">Login</a></small>
             </div>
         </div>
     </div>
