@@ -18,72 +18,30 @@
     <div class="teaser-section" id="products">
         <div class="section">
             <div class="game-list">
-                <!-- Game Cards -->
-                <div class="game-card" data-game="hollow-knight">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/hollow_knight.png" alt="Hollow Knight">
+                <!-- Game Cards - Data dari Database -->
+                <?php if (!empty($data['games'])): ?>
+                    <?php foreach ($data['games'] as $game): ?>
+                        <?php 
+                            $gameModel = new Game_model();
+                            $slug = $gameModel->titleToSlug($game['judul']);
+                            $imagePath = $gameModel->getGameImage($game['judul']);
+                        ?>
+                        <div class="game-card" data-game="<?= $game['id']; ?>" data-slug="<?= $slug; ?>">
+                            <div class="placeholder-image">
+                                <img src="<?=BASEURL;?>/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="col-12 text-center">
+                        <p class="text-muted">Tidak ada game yang ditemukan.</p>
                     </div>
-                </div>
-                <div class="game-card" data-game="celeste">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/celeste.png" alt="Celeste">
-                    </div>
-                </div>
-                <div class="game-card" data-game="tekken">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/tekken.webp" alt="Tekken">
-                    </div>
-                </div>
-                <div class="game-card" data-game="astfu">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/ASTFU.jpg" alt="A Space For The Unbound">
-                    </div>
-                </div>
-                <div class="game-card" data-game="undertale">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/undertale.png" alt="Undertale">
-                    </div>
-                </div>
-                <div class="game-card" data-game="until-then">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/until_then.jpg" alt="Until Then">
-                    </div>
-                </div>
-                <div class="game-card" data-game="omori">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/omori.jpg" alt="Omori">
-                    </div>
-                </div>
-                <div class="game-card" data-game="minecraft">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/minecraft.jpg" alt="Minecraft">
-                    </div>
-                </div>
-                <div class="game-card" data-game="persona3">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/persona3.jpg" alt="Persona 3">
-                    </div>
-                </div>
-                <div class="game-card" data-game="stardew">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/stardew.jpg" alt="Stardew Valley">
-                    </div>
-                </div>
-                <div class="game-card" data-game="persona5">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/persona5.png" alt="Persona 5">
-                    </div>
-                </div>
-                <div class="game-card" data-game="fe3">
-                    <div class="placeholder-image">
-                        <img src="<?=BASEURL;?>/img/fe3.jpg" alt="Fire Emblem">
-                    </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 
-    <!-- Game Description Modal (Hidden by default) -->
+    <!-- Game Description Modal -->
     <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content bg-dark text-white">
@@ -117,10 +75,17 @@
                     </div>
                 </div>
                 <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-success">Add to Library</button>
+                    <button type="button" class="btn btn-success" onclick="addToLibrary()">Add to Library</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loadingIndicator" class="d-none position-fixed top-50 start-50 translate-middle">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
 
