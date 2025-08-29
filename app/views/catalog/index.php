@@ -42,45 +42,57 @@
     </div>
 
     <!-- Game Description Modal -->
-    <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header border-secondary">
-                    <h5 class="modal-title" id="gameModalLabel">Game Title</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img id="gameImage" src="" alt="Game Image" class="img-fluid rounded">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="game-info">
-                                <h6 class="text-primary">Genre:</h6>
-                                <p id="gameGenre" class="mb-2"></p>
-                                
-                                <h6 class="text-primary">Developer:</h6>
-                                <p id="gameDeveloper" class="mb-2"></p>
-                                
-                                <h6 class="text-primary">Release Date:</h6>
-                                <p id="gameReleaseDate" class="mb-2"></p>
-                                
-                                <h6 class="text-primary">Platform:</h6>
-                                <p id="gamePlatform" class="mb-3"></p>
-                                
-                                <h6 class="text-primary">Description:</h6>
-                                <p id="gameDescription"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-success" onclick="addToLibrary()">Add to Library</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+   <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      
+      <!-- Header -->
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title" id="gameModalLabel">Game Title</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="row align-items-start">
+          
+          <!-- Gambar di kiri -->
+          <div class="col-md-4 mb-3 mb-md-0">
+            <img id="gameImage" src="" alt="Game Image" class="img-fluid rounded shadow">
+          </div>
+          
+          <!-- Info di kanan -->
+          <div class="col-md-8">
+            <div class="game-info text-start"> <!-- text-start = rata kiri -->
+              <h6 class="text-primary">Genre:</h6>
+              <p id="gameGenre" class="mb-2"></p>
+              
+              <h6 class="text-primary">Developer:</h6>
+              <p id="gameDeveloper" class="mb-2"></p>
+              
+              <h6 class="text-primary">Release Date:</h6>
+              <p id="gameReleaseDate" class="mb-2"></p>
+              
+              <h6 class="text-primary">Platform:</h6>
+              <p id="gamePlatform" class="mb-3"></p>
+              
+              <h6 class="text-primary">Description:</h6>
+              <p id="gameDescription" class="mb-0"></p>
             </div>
+          </div>
+          
         </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="modal-footer border-secondary">
+        <button type="button" class="btn btn-success" onclick="addToLibrary()">Add to Library</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+      
     </div>
+  </div>
+</div>
 
     <!-- Loading indicator -->
     <div id="loadingIndicator" class="d-none position-fixed top-50 start-50 translate-middle">

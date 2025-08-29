@@ -132,7 +132,9 @@ body::-webkit-scrollbar {
   font-weight: 600;
   color: #ffffff;
 }
-
+.game-info{
+  text-align: right;
+}
 .game-info h6 {
   color: #4dabf7 !important;
   font-weight: 600;
@@ -141,13 +143,14 @@ body::-webkit-scrollbar {
 }
 
 .game-info p {
+  text-align: right;
   color: #e9ecef;
   line-height: 1.6;
   margin-bottom: 0.5rem;
 }
 
 #gameDescription {
-  text-align: justify;
+  text-align: right;
   line-height: 1.7;
   color: #f8f9fa;
 }
