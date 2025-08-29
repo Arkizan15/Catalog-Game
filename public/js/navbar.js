@@ -1,17 +1,16 @@
 const modal = document.getElementById("profileModal");
 
 function openAccount() {
-    // Bisa ditambahkan AJAX call untuk mendapatkan info user terbaru
-    fetchUserInfo();
-    openModal();
+    document.getElementById('profileModal').style.display = 'flex';
 }
+
 
 function openModal() {
     modal.style.display = "flex";
 }
 
 function closeModal() {
-    modal.style.display = "none";
+    document.getElementById('profileModal').style.display = 'none';
 }
 
 // Fungsi untuk mengambil info user dari server
@@ -82,8 +81,9 @@ function logout() {
 
 // Event listeners
 window.onclick = function(event) {
+    const modal = document.getElementById('profileModal');
     if (event.target == modal) {
-        closeModal();
+        modal.style.display = 'none';
     }
 }
 

@@ -1,5 +1,5 @@
 .navbar {
-    position: absolute;
+    position: fixed; /* Ubah dari absolute ke fixed */
     top: 0;
     left: 0;
     right: 0;
@@ -8,6 +8,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: rgba(26, 26, 26, 0.9); /* Tambahkan background */
+    backdrop-filter: blur(10px);
+}
+
+/* Tambahkan padding top untuk body agar tidak tertutup navbar */
+body {
+    padding-top: 100px; /* Sesuaikan dengan tinggi navbar */
 }
 
 .nav-menu {
