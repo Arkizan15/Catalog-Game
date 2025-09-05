@@ -65,16 +65,16 @@
           <div class="col-md-8">
             <div class="game-info text-start"> <!-- text-start = rata kiri -->
               <h6 class="text-primary">Genre:</h6>
-              <p id="gameGenre" class="mb-2"></p>
+              <p id="gameGenre" class="mb-4"></p>
               
               <h6 class="text-primary">Developer:</h6>
-              <p id="gameDeveloper" class="mb-2"></p>
+              <p id="gameDeveloper" class="mb-4"></p>
               
               <h6 class="text-primary">Release Date:</h6>
-              <p id="gameReleaseDate" class="mb-2"></p>
+              <p id="gameReleaseDate" class="mb-4"></p>
               
               <h6 class="text-primary">Platform:</h6>
-              <p id="gamePlatform" class="mb-3"></p>
+              <p id="gamePlatform" class="mb-4"></p>
               
               <h6 class="text-primary">Description:</h6>
               <p id="gameDescription" class="mb-0"></p>

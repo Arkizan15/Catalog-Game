@@ -18,9 +18,6 @@
            
        <div class="navbar-right">
            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
-               <span class="username-display">
-                   <?= htmlspecialchars($_SESSION['username']); ?>
-               </span>
                <i class="akun bi bi-person-circle" onclick="openAccount()"></i>
            <?php else: ?>
                <a href="<?=BASEURL;?>auth" class="login-link">Login</a>

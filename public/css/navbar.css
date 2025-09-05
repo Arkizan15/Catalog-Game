@@ -4,17 +4,14 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 30px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(26, 26, 26, 0.9); /* Tambahkan background */
-    backdrop-filter: blur(10px);
 }
 
 /* Tambahkan padding top untuk body agar tidak tertutup navbar */
 body {
-    padding-top: 100px; /* Sesuaikan dengan tinggi navbar */
+    padding-top: 33px; /* Sesuaikan dengan tinggi navbar */
 }
 
 .nav-menu {
@@ -42,9 +39,6 @@ body {
     color: #cccccc;
 }
 
-.nav-menu .active a {
-    border-bottom: 2px solid white;
-}
 
 /* User section styling */
 .nav-user {
