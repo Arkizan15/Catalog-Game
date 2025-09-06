@@ -80,11 +80,6 @@
                     <div class="library-games">
                         <div class="row" id="gamesContainer">
                             <?php foreach ($data['games'] as $game): ?>
-                                <?php 
-                                    $gameModel = new Game_model();
-                                    $imagePath = $gameModel->getGameImage($game['judul']);
-                                    $slug = $gameModel->titleToSlug($game['judul']);
-                                ?>
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4 game-item" 
                                      data-title="<?= strtolower($game['judul']); ?>"
                                      data-genre="<?= strtolower($game['genre']); ?>"
@@ -92,7 +87,7 @@
                                      data-added="<?= $game['added_at']; ?>">
                                     <div class="library-game-card">
                                         <div class="game-image-container">
-                                            <img src="<?= BASEURL; ?>/img/<?= $imagePath; ?>" 
+                                            <img src="<?= BASEURL; ?>/img/<?= $game['image']; ?>" 
                                                  alt="<?= htmlspecialchars($game['judul']); ?>" 
                                                  class="game-image">
                                             <div class="game-overlay">
@@ -124,7 +119,7 @@
         </div>
     </div>
 
-    <!-- Game Details Modal (reuse dari catalog) -->
+    <!-- Game Details Modal -->
     <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content bg-dark text-white">

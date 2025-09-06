@@ -145,10 +145,9 @@ class Game_model {
             'Persona 5' => 'persona5.png',
             'Stardew Valley' => 'stardew.jpg',
             'Tekken 8' => 'tekken.webp',
-            'Ultraman Fighting Evolution 3' => 'ultraman.jpg',
+            'Ultraman Fighting Evolution 3' => 'fe3.jpg',
             'Undertale' => 'undertale.png',
             'Until Then' => 'until_then.jpg',
-            'Fire Emblem: Three Houses' => 'fe3.jpg'
         ];
         
         return isset($imageMapping[$title]) ? $imageMapping[$title] : 'default.jpg';
