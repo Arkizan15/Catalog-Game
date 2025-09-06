@@ -1,9 +1,48 @@
 const modal = document.getElementById("profileModal");
 
-function openAccount() {
-    document.getElementById('profileModal').style.display = 'flex';
+// Mobile menu functionality
+function toggleMobileMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    navMenu.classList.toggle('active');
+    toggle.classList.toggle('active');
+    
+    // Toggle burger animation
+    const lines = toggle.querySelectorAll('.burger-line');
+    if (toggle.classList.contains('active')) {
+        lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+    } else {
+        lines[0].style.transform = 'none';
+        lines[1].style.opacity = '1';
+        lines[2].style.transform = 'none';
+    }
 }
 
+// Close mobile menu when clicking on a link
+function closeMobileMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        toggle.classList.remove('active');
+        
+        // Reset burger lines
+        const lines = toggle.querySelectorAll('.burger-line');
+        lines[0].style.transform = 'none';
+        lines[1].style.opacity = '1';
+        lines[2].style.transform = 'none';
+    }
+}
+
+// Profile modal functions
+function openAccount() {
+    document.getElementById('profileModal').style.display = 'flex';
+    closeMobileMenu(); // Close mobile menu if open
+}
 
 function openModal() {
     modal.style.display = "flex";
@@ -42,9 +81,9 @@ function updateModalContent(user) {
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>${user.username || 'User'}</h2>
             <p>Bergabung sejak: ${user.created_at || 'N/A'}</p>
-            <div class="user-actions">
-                <button onclick="goToLibrary()" class="btn btn-primary">My Library</button>
-                <button onclick="logout()" class="btn btn-danger">Logout</button>
+            <div class="modal-actions">
+                <a href="${window.BASEURL || ''}library" class="btn btn-primary">My Library</a>
+                <a href="${window.BASEURL || ''}auth/logout" class="btn btn-danger">Logout</a>
             </div>
         `;
     }
@@ -82,15 +121,40 @@ function logout() {
 // Event listeners
 window.onclick = function(event) {
     const modal = document.getElementById('profileModal');
+    const navMenu = document.getElementById('navMenu');
+    
+    // Close modal if clicking outside
     if (event.target == modal) {
         modal.style.display = 'none';
+    }
+    
+    // Close mobile menu if clicking outside
+    if (!event.target.closest('.navbar') && navMenu && navMenu.classList.contains('active')) {
+        closeMobileMenu();
     }
 }
 
 // Keyboard navigation
 document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && modal.style.display === 'flex') {
-        closeModal();
+    if (event.key === 'Escape') {
+        if (modal.style.display === 'flex') {
+            closeModal();
+        }
+        const navMenu = document.getElementById('navMenu');
+        if (navMenu && navMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    }
+});
+
+// Handle window resize
+window.addEventListener('resize', function() {
+    const navMenu = document.getElementById('navMenu');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    
+    // Close mobile menu on desktop
+    if (window.innerWidth > 768 && navMenu && navMenu.classList.contains('active')) {
+        closeMobileMenu();
     }
 });
 
@@ -101,4 +165,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (accountIcon) {
         accountIcon.addEventListener('click', openAccount);
     }
+    
+    // Add click handlers to nav links for mobile
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Handle touch events for mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    document.addEventListener('touchstart', e => {
+        touchStartY = e.changedTouches[0].screenY;
+    });
+    
+    document.addEventListener('touchend', e => {
+        touchEndY = e.changedTouches[0].screenY;
+        // Optional: Add swipe gestures for mobile menu
+    });
 });

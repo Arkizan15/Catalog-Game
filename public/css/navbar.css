@@ -1,5 +1,5 @@
 .navbar {
-    position: fixed; /* Ubah dari absolute ke fixed */
+    position: relative;
     top: 0;
     left: 0;
     right: 0;
@@ -7,11 +7,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 30px;
 }
 
-/* Tambahkan padding top untuk body agar tidak tertutup navbar */
-body {
-    padding-top: 33px; /* Sesuaikan dengan tinggi navbar */
+/* Navbar left section */
+.navbar-left {
+    flex: 1;
 }
 
 .nav-menu {
@@ -39,12 +40,19 @@ body {
     color: #cccccc;
 }
 
+/* Navbar right section */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 
 /* User section styling */
 .nav-user {
     display: flex;
     align-items: center;
     gap: 15px;
+    
 }
 
 .username-display {
@@ -70,10 +78,11 @@ body {
 }
 
 .akun {
-    font-size: 35px;
+    font-size: 32px;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
+    padding: 5px;
 }
 
 .akun:hover {
@@ -104,6 +113,8 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     position: relative;
     animation: modalFadeIn 0.3s ease;
+    margin: 20px;
+    max-width: calc(100vw - 40px);
 }
 
 @keyframes modalFadeIn {
@@ -144,8 +155,8 @@ body {
     font-size: 14px;
 }
 
-/* User actions buttons */
-.user-actions {
+/* Modal actions buttons */
+.modal-actions {
     margin-top: 20px;
     display: flex;
     gap: 10px;
@@ -153,7 +164,8 @@ body {
     flex-wrap: wrap;
 }
 
-.user-actions button {
+.modal-actions button,
+.modal-actions a {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -162,6 +174,9 @@ body {
     font-weight: 500;
     transition: all 0.3s ease;
     min-width: 100px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
 .btn-primary {
@@ -173,6 +188,8 @@ body {
     background: linear-gradient(135deg, #0056b3, #004085);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    color: white;
+    text-decoration: none;
 }
 
 .btn-danger {
@@ -184,67 +201,142 @@ body {
     background: linear-gradient(135deg, #c82333, #bd2130);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #218838, #1ba085);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    color: white;
+    text-decoration: none;
+}
+
+/* Mobile burger menu */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.burger-line {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 2px 0;
+    transition: 0.3s;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
     .navbar {
-        padding: 20px 25px;
-        flex-direction: column;
-        gap: 15px;
+        padding: 10px 20px;
+        position: fixed;
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .navbar-left {
+        flex: 0;
     }
 
     .nav-menu {
-        gap: 25px;
-        margin-bottom: 10px;
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        text-align: center;
     }
 
     .nav-menu a {
-        font-size: 16px;
+        font-size: 18px;
+        padding: 10px;
+        display: block;
     }
 
-    .username-display {
-        font-size: 14px;
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .navbar-right {
+        gap: 15px;
     }
 
     .akun {
-        font-size: 30px;
+        font-size: 28px;
     }
 
     .modal-content {
-        width: 90%;
+        width: calc(100vw - 40px);
         max-width: 320px;
         padding: 20px;
     }
 
-    .user-actions {
+    .modal-actions {
         flex-direction: column;
         gap: 8px;
     }
 
-    .user-actions button {
+    .modal-actions button,
+    .modal-actions a {
         width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     .navbar {
-        padding: 15px 20px;
+        padding: 6px 15px;
+        height: 50px; /* Fixed height for small mobile */
     }
 
     .nav-menu {
-        gap: 20px;
+        top: 55px;
+        padding: 15px;
+        gap: 15px;
     }
 
     .nav-menu a {
-        font-size: 14px;
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .akun {
+        font-size: 26px;
     }
 
     .modal-content {
         padding: 15px;
+        margin: 15px;
     }
 
     .modal-content h2 {
         font-size: 20px;
+    }
+
+    .modal-actions button,
+    .modal-actions a {
+        padding: 8px 16px;
+        font-size: 13px;
+        min-width: auto;
     }
 }

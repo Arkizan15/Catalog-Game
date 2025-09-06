@@ -9,7 +9,14 @@
 <body>
    <nav class="navbar">
        <div class="navbar-left">
-           <ul class="nav-menu">
+           <!-- Mobile menu toggle -->
+           <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+               <div class="burger-line"></div>
+               <div class="burger-line"></div>
+               <div class="burger-line"></div>
+           </div>
+           
+           <ul class="nav-menu" id="navMenu">
                <li><a href="<?=BASEURL;?>home">Home</a></li>
                <li><a href="<?=BASEURL;?>catalog">Games</a></li>
                <li><a href="<?=BASEURL;?>library">Library</a></li>
@@ -48,3 +55,5 @@
    </div>
 
    <script src="<?=BASEURL;?>js/navbar.js"></script>
+</body>
+</html>

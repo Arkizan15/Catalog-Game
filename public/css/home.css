@@ -19,8 +19,13 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+/* Add padding top to compensate for fixed navbar */
+body {
+    padding-top: 70px;
+}
+
 .landing-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
     width: 100vw;
     background: transparent;
     position: relative;
@@ -30,7 +35,7 @@ body::-webkit-scrollbar {
 
 .background-image {
     position: absolute;
-    top: 0;
+    top: -70px; /* Compensate for navbar height */
     left: 0;
     z-index: -1;
     width: 100vw;
@@ -43,7 +48,7 @@ body::-webkit-scrollbar {
 .hero {
     display: flex;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
     padding: 0 50px;
     position: relative;
     z-index: 2;
@@ -60,6 +65,7 @@ body::-webkit-scrollbar {
     font-weight: bold;
     margin-bottom: 30px;
     line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-description {
@@ -68,6 +74,7 @@ body::-webkit-scrollbar {
     margin-bottom: 40px;
     color: #cccccc;
     max-width: 400px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .cta-button {
@@ -89,6 +96,8 @@ body::-webkit-scrollbar {
     background-color: #f0f0f0;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    color: #333333;
+    text-decoration: none;
 }
 
 .hero-image {
@@ -157,29 +166,61 @@ body::-webkit-scrollbar {
     }
 }
 
+/* Tablet responsive */
+@media (max-width: 1024px) {
+    body {
+        padding-top: 60px;
+    }
+
+    .landing-container {
+        min-height: calc(100vh - 60px);
+    }
+
+    .background-image {
+        top: -60px;
+    }
+
+    .hero {
+        padding: 0 40px;
+        min-height: calc(100vh - 60px);
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .character-container {
+        width: 400px;
+        height: 480px;
+    }
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 20px 25px;
+    body {
+        padding-top: 60px;
     }
 
-    .nav-menu {
-        gap: 25px;
+    .landing-container {
+        min-height: calc(100vh - 60px);
     }
 
-    .nav-menu a {
-        font-size: 16px;
+    .background-image {
+        top: -60px;
     }
 
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 120px 25px 50px;
-        min-height: 100vh;
+        padding: 50px 25px;
+        min-height: calc(100vh - 60px);
+        justify-content: center;
     }
 
     .hero-content {
         max-width: 100%;
         margin-bottom: 40px;
+        order: 1;
     }
 
     .hero-title {
@@ -193,28 +234,54 @@ body::-webkit-scrollbar {
         margin-bottom: 30px;
     }
 
+    .hero-image {
+        order: 2;
+        margin-top: 20px;
+    }
+
     .character-container {
         width: 300px;
         height: 360px;
     }
 
-    .landing-container,
-    .background-image {
-        width: 100vw;
+    .particles {
+        width: 80%;
+        left: 10%;
     }
 }
 
+/* Small mobile */
 @media (max-width: 480px) {
-    .navbar {
-        padding: 15px 20px;
+    body {
+        padding-top: 55px;
     }
 
-    .nav-menu {
-        gap: 20px;
+    .landing-container {
+        min-height: calc(100vh - 55px);
+    }
+
+    .background-image {
+        top: -55px;
+    }
+
+    .hero {
+        padding: 30px 20px;
+        min-height: calc(100vh - 55px);
     }
 
     .hero-title {
         font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 14px;
     }
 
     .character-container {
@@ -222,7 +289,33 @@ body::-webkit-scrollbar {
         height: 300px;
     }
 
+    .particles {
+        width: 90%;
+        left: 5%;
+    }
+
+    .particle {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* Extra small mobile */
+@media (max-width: 360px) {
     .hero {
-        padding: 100px 20px 30px;
+        padding: 20px 15px;
+    }
+
+    .hero-title {
+        font-size: 24px;
+    }
+
+    .hero-description {
+        font-size: 12px;
+    }
+
+    .character-container {
+        width: 220px;
+        height: 264px;
     }
 }

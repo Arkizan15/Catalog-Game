@@ -5,10 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $data['judul']; ?> - Kiki's Catalog Game</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CRITICAL: Inline CSS fix for navbar gap -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100vw !important;
+            margin: 0 !important;
+            z-index: 1000 !important;
+            height: 65px !important;
+        }
+        
+        body {
+            padding-top: 65px !important;
+        }
+        
+        .library-container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        .library-header {
+            margin-top: 0 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                height: 55px !important;
+            }
+            body {
+                padding-top: 55px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                height: 50px !important;
+            }
+            body {
+                padding-top: 50px !important;
+            }
+        }
+    </style>
+    
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/catalog.css">
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/library.css">
+    <link rel="stylesheet" href="<?= BASEURL; ?>/css/navbar.css">
 </head>
 <body>
+   
+
     <div class="container-fluid library-container">
         <!-- Header -->
         <div class="library-header">
@@ -169,7 +230,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"></script>
     
     <!-- Pass data to JavaScript -->
     <script>
@@ -179,5 +239,8 @@
     
     <!-- Library JS -->
     <script src="<?= BASEURL; ?>/js/library.js"></script>
+    
+    <!-- Include Footer -->
+   
 </body>
 </html>

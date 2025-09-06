@@ -1,0 +1,240 @@
+/* Global CSS fixes for consistent spacing across all pages */
+
+/* Remove conflicting body padding-top from navbar.css */
+body {
+    padding-top: 0 !important;
+}
+
+/* Apply consistent body spacing for pages with navbar */
+.page-with-navbar {
+    padding-top: 70px;
+}
+
+/* Specific adjustments for each page */
+
+/* Home page adjustments */
+.home-page {
+    padding-top: 0;
+}
+
+.home-page .landing-container {
+    min-height: 100vh;
+}
+
+.home-page .background-image {
+    top: 0;
+    height: 100vh;
+}
+
+.home-page .hero {
+    min-height: 100vh;
+}
+
+/* Catalog page adjustments */
+.catalog-page {
+    padding-top: 70px;
+}
+
+.catalog-page .judul {
+    margin-top: 20px;
+}
+
+/* Library page adjustments */
+.library-page {
+    padding-top: 70px;
+}
+
+.library-page .library-container {
+    padding-top: 0;
+}
+
+/* Auth pages (login/register) - no navbar padding needed */
+.auth-page {
+    padding-top: 0;
+}
+
+/* Footer positioning fixes */
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    flex: 1;
+}
+
+.container-footer {
+    margin-top: auto;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .page-with-navbar {
+        padding-top: 60px;
+    }
+    
+    .catalog-page {
+        padding-top: 60px;
+    }
+    
+    .library-page {
+        padding-top: 60px;
+    }
+    
+    .catalog-page .judul {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-with-navbar {
+        padding-top: 55px;
+    }
+    
+    .catalog-page {
+        padding-top: 55px;
+    }
+    
+    .library-page {
+        padding-top: 55px;
+    }
+    
+    .catalog-page .judul {
+        margin-top: 10px;
+    }
+}
+
+/* Z-index management */
+.navbar {
+    z-index: 1000;
+}
+
+.modal {
+    z-index: 2000;
+}
+
+.container-footer {
+    z-index: 10;
+    position: relative;
+}
+
+/* Prevent content overlap */
+.teaser-section,
+.library-content,
+.main-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Smooth transitions for responsive changes */
+@media (prefers-reduced-motion: no-preference) {
+    * {
+        transition: padding 0.3s ease, margin 0.3s ease;
+    }
+    
+    .navbar {
+        transition: all 0.3s ease;
+    }
+}
+
+/* Fix for overlapping elements */
+.content-section {
+    position: relative;
+    z-index: 1;
+}
+
+.floating-elements {
+    position: fixed;
+    z-index: 999;
+}
+
+/* Ensure proper spacing in all containers */
+.container,
+.container-fluid {
+    position: relative;
+}
+
+/* Fix for mobile viewport issues */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari specific fixes */
+    body {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+}
+
+/* Prevent horizontal scrolling issues */
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Fix for small screen titles and text */
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.5rem !important;
+        line-height: 1.3;
+    }
+    
+    h2 {
+        font-size: 1.3rem !important;
+        line-height: 1.3;
+    }
+    
+    h3 {
+        font-size: 1.1rem !important;
+        line-height: 1.3;
+    }
+    
+    p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}
+
+/* Loading states and animations */
+@keyframes smoothFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: smoothFadeIn 0.4s ease-out;
+}
+
+/* Performance optimizations */
+.game-card,
+.library-game-card {
+    will-change: transform;
+}
+
+.modal-content {
+    will-change: transform, opacity;
+}
+
+/* Fix for touch devices */
+@media (pointer: coarse) {
+    .btn,
+    .game-card,
+    .library-game-card,
+    .nav-menu a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .akun {
+        padding: 8px;
+    }
+}
