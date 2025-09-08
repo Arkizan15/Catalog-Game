@@ -118,7 +118,6 @@ function addToLibrary() {
         showLoading(false);
         
         if (result.status === 'success') {
-            alert(result.message || 'Game berhasil ditambahkan ke library!');
             
             // Close modal after successful addition
             const gameModal = bootstrap.Modal.getInstance(document.getElementById('gameModal'));

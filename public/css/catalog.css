@@ -1,4 +1,4 @@
-/* UPDATED CATALOG.CSS - Replace the existing responsive sections */
+/* UPDATED CATALOG.CSS - Fixed Game Cards & Enhanced Desktop Modal */
 
 html {
   scroll-behavior: smooth;
@@ -55,6 +55,7 @@ body::-webkit-scrollbar {
   min-height: auto;
 }
 
+/* ORIGINAL GAME CARD STYLES - RESTORED */
 .game-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -127,20 +128,26 @@ body::-webkit-scrollbar {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Modal Styles - UPDATED FOR RESPONSIVE BEHAVIOR */
+/* ===========================================
+   MODAL STYLES - DESKTOP FOCUSED WITH RESPONSIVE
+   =========================================== */
+
+/* Base Modal Styles */
 .modal-content {
   background: linear-gradient(135deg, #1a1a1a, #2e2e2e) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
 }
 
 .modal-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .modal-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .modal-title {
@@ -162,7 +169,7 @@ body::-webkit-scrollbar {
 
 .game-info p {
   text-align: left;
-  color: #e9ecef;
+  color: #ffffff;
   line-height: 1.6;
   margin-bottom: 1rem;
 }
@@ -181,336 +188,506 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
+/* Button Styles */
+.modal-footer .btn {
+  transition: all 0.3s ease;
+  border: none;
+}
+
 .btn-success {
   background: linear-gradient(135deg, #28a745, #20c997);
-  border: none;
-  transition: all 0.3s ease;
 }
 
 .btn-success:hover {
   background: linear-gradient(135deg, #218838, #1ba085);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
 }
 
 .btn-secondary {
   background: linear-gradient(135deg, #6c757d, #5a6268);
-  border: none;
-  transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
   background: linear-gradient(135deg, #5a6268, #495057);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #c82333, #bd2130);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+.btn-close-white {
+  filter: invert(1) grayscale(100%) brightness(200%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
 
 .btn-close-white:hover {
-  filter: brightness(0.8);
+  opacity: 1;
+  transform: scale(1.1);
 }
 
-/* Animation untuk modal */
+/* Modal Animation */
 .modal.fade .modal-dialog {
-  transform: scale(0.8);
-  transition: transform 0.3s ease-out;
+  transform: scale(0.9) translateY(-30px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .modal.show .modal-dialog {
-  transform: scale(1);
+  transform: scale(1) translateY(0);
 }
 
-/* RESPONSIVE DESIGN - UPDATED */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(3px);
+}
 
-/* Desktop - Navbar tidak fixed, body tanpa padding-top */
+/* ===========================================
+   RESPONSIVE DESIGN - DESKTOP FIRST MODAL
+   =========================================== */
+
+/* DESKTOP - PRIORITY: EXTRA WIDE MODAL */
 @media (min-width: 769px) {
-    body {
-        padding-top: 0 !important;
-    }
-    
-    .judul {
-        margin-top: 20px;
-        padding: 0 20px;
-    }
-    
-    .teaser-section {
-        padding-top: 40px;
-    }
-    
-    /* Desktop Modal - Lebih lebar */
-    .modal-dialog.modal-lg {
-        max-width: 900px;
-        width: 90%;
-    }
-    
-    .modal-content {
-        min-height: 500px;
-    }
-    
-    #gameImage {
-        max-height: 400px;
-        min-height: 300px;
-    }
-    
-    .game-info h6 {
-        font-size: 1.1rem;
-        margin-top: 1rem;
-    }
-    
-    .game-info p {
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-    
-    #gameDescription {
-        font-size: 1rem;
-        line-height: 1.7;
-    }
+  body {
+    padding-top: 0 !important;
+  }
+  
+  .judul {
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+  
+  .teaser-section {
+    padding-top: 40px;
+  }
+  
+  /* DESKTOP MODAL - MAXIMUM WIDTH */
+  .modal-dialog.modal-lg {
+    max-width: 1600px !important; /* SUPER WIDE */
+    width: 98% !important; /* Almost full width */
+    margin: 1rem auto !important;
+  }
+  
+  .modal-content {
+    min-height: 700px;
+    border-radius: 15px;
+    width: 100% !important;
+  }
+  
+  .modal-body {
+    padding: 3rem 4rem;
+  }
+  
+  .modal-header {
+    padding: 2.5rem 4rem 1rem 4rem;
+  }
+  
+  .modal-footer {
+    padding: 1rem 4rem 2.5rem 4rem;
+  }
+  
+  .modal-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+  }
+  
+  #gameImage {
+    max-height: 550px;
+    min-height: 450px;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .game-info {
+    padding-left: 60px; /* Extra space */
+  }
+  
+  .game-info h6 {
+    font-size: 1.5rem;
+    margin-top: 1.8rem;
+    margin-bottom: 0.6rem;
+    color: #4dabf7 !important;
+    font-weight: 600;
+  }
+  
+  .game-info p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
+    color: #f8f9fa;
+  }
+  
+  #gameDescription {
+    font-size: 1.2rem;
+    line-height: 2;
+    color: #ffffff;
+    text-align: justify;
+  }
 }
 
 @media (max-width: 1400px) and (min-width: 769px) {
   .game-list {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
   
   .game-card {
-    max-width: 250px;
-    height: 350px;
+    max-width: 280px;
+    height: 400px;
   }
 }
 
 /* Tablet */
 @media (min-width: 768px) and (max-width: 768px) {
-    body {
-        padding-top: 60px !important;
-    }
-    
-    .judul {
-        margin-top: 0;
-        padding: 15px 15px 0 15px;
-    }
-    
-    .teaser-section {
-        padding-top: 20px;
-    }
-    
-    .modal-dialog {
-        max-width: 80%;
-        margin: 1rem auto;
-    }
-    
-    #gameImage {
-        max-height: 300px;
-    }
+  body {
+    padding-top: 60px !important;
+  }
+  
+  .judul {
+    margin-top: 0;
+    padding: 15px 15px 0 15px;
+  }
+  
+  .teaser-section {
+    padding-top: 20px;
+  }
+  
+  .modal-dialog {
+    max-width: 90% !important;
+    width: 90% !important;
+    margin: 1rem auto;
+  }
+  
+  .modal-content {
+    min-height: 500px;
+  }
+  
+  #gameImage {
+    max-height: 350px;
+    min-height: 280px;
+  }
+  
+  .game-info h6 {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+  }
+  
+  .game-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  #gameDescription {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  .modal-body {
+    padding: 2rem;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+  }
 }
 
-/* Mobile - Navbar fixed dengan padding */
+/* Mobile */
 @media (max-width: 768px) {
-    body {
-        padding-top: 60px !important;
-    }
-    
-    .judul {
-        margin-top: 0;
-        padding: 15px 15px 0 15px;
-    }
-    
-    .judul h1 {
-        font-size: 2.2rem;
-    }
-    
-    .teaser-section {
-        padding: 15px;
-        padding-top: 20px;
-    }
-    
-    .section {
-        padding: 20px;
-        margin-bottom: 25px;
-    }
-    
-    .game-list {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 15px;
-    }
-    
-    .game-card {
-        max-width: 220px;
-        height: 320px;
-        margin-top: 15px;
-    }
-    
-    /* Mobile Modal - Responsif penuh */
-    .modal-dialog {
-        margin: 0.5rem;
-        max-width: calc(100vw - 1rem);
-        width: calc(100vw - 1rem);
-    }
-    
-    .modal-content {
-        border-radius: 8px;
-    }
-    
-    .modal-body {
-        padding: 1rem;
-    }
-    
-    .modal-body .row {
-        flex-direction: column;
-    }
-    
-    .modal-body .col-md-4,
-    .modal-body .col-md-8 {
-        max-width: 100%;
-        margin-bottom: 1rem;
-    }
-    
-    #gameImage {
-        max-height: 200px;
-        width: 100%;
-        object-fit: cover;
-    }
-    
-    .modal-title {
-        font-size: 1.2rem;
-    }
-    
-    .game-info h6 {
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-    }
-    
-    .game-info p {
-        font-size: 0.85rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    #gameDescription {
-        font-size: 0.85rem;
-        line-height: 1.5;
-    }
+  body {
+    padding-top: 60px !important;
+  }
+  
+  .judul {
+    margin-top: 0;
+    padding: 15px 15px 0 15px;
+  }
+  
+  .judul h1 {
+    font-size: 2.2rem;
+  }
+  
+  .teaser-section {
+    padding: 15px;
+    padding-top: 20px;
+  }
+  
+  .section {
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+  
+  .game-list {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+  }
+  
+  .game-card {
+    max-width: 220px;
+    height: 320px;
+    margin-top: 15px;
+  }
+  
+  /* Mobile Modal */
+  .modal-dialog {
+    margin: 0.5rem !important;
+    max-width: calc(100vw - 1rem) !important;
+    width: calc(100vw - 1rem) !important;
+  }
+  
+  .modal-content {
+    border-radius: 12px;
+    min-height: auto;
+  }
+  
+  .modal-body {
+    padding: 1.2rem !important;
+  }
+  
+  .modal-header {
+    padding: 1rem 1.2rem 0.5rem 1.2rem;
+  }
+  
+  .modal-footer {
+    padding: 0.5rem 1.2rem 1rem 1.2rem;
+  }
+  
+  /* Layout vertikal untuk mobile */
+  .modal-body .row {
+    flex-direction: column !important;
+  }
+  
+  .modal-body .col-md-4,
+  .modal-body .col-md-8 {
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    margin-bottom: 1rem;
+  }
+  
+  #gameImage {
+    max-height: 220px !important;
+    min-height: 180px !important;
+    width: 100% !important;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .game-info {
+    padding-left: 0 !important;
+    text-align: left !important;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+  
+  .game-info h6 {
+    font-size: 0.95rem !important;
+    margin-top: 0.8rem !important;
+    margin-bottom: 0.3rem !important;
+    color: #4dabf7 !important;
+  }
+  
+  .game-info p {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.8rem !important;
+    line-height: 1.5;
+    color: #f0f0f0;
+  }
+  
+  #gameDescription {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    color: #ffffff;
+    text-align: left !important;
+  }
+  
+  .modal-footer {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  .modal-footer .btn {
+    flex: 1;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
 }
 
 @media (max-width: 576px) {
-    .judul {
-        padding: 10px 15px 0 15px;
-    }
-    
-    .judul h1 {
-        font-size: 1.8rem;
-    }
-    
-    .game-list {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 12px;
-    }
-    
-    .game-card {
-        max-width: 200px;
-        height: 280px;
-        margin-top: 10px;
-    }
-    
-    .placeholder-image {
-        font-size: 14px;
-    }
+  .judul {
+    padding: 10px 15px 0 15px;
+  }
+  
+  .judul h1 {
+    font-size: 1.8rem;
+  }
+  
+  .game-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  
+  .game-card {
+    max-width: 200px;
+    height: 280px;
+    margin-top: 10px;
+  }
+  
+  .placeholder-image {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
-    body {
-        padding-top: 55px !important;
-    }
-    
-    .judul {
-        padding: 5px 10px 0 10px;
-    }
-    
-    .judul h1 {
-        font-size: 1.5rem;
-    }
-    
-    .teaser-section {
-        padding: 10px;
-        padding-top: 15px;
-    }
-    
-    .section {
-        padding: 10px;
-        margin-bottom: 15px;
-    }
-    
-    .game-list {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 10px;
-    }
-    
-    .game-card {
-        max-width: 180px;
-        height: 250px;
-        margin-top: 8px;
-    }
-    
-    .placeholder-image {
-        font-size: 12px;
-    }
-    
-    /* Extra small Modal */
-    .modal-dialog {
-        margin: 0.25rem;
-        max-width: calc(100vw - 0.5rem);
-        width: calc(100vw - 0.5rem);
-    }
-    
-    .modal-body {
-        padding: 0.75rem;
-    }
-    
-    .modal-title {
-        font-size: 1.1rem;
-        line-height: 1.3;
-    }
-    
-    .game-info h6 {
-        font-size: 0.85rem;
-    }
-    
-    .game-info p {
-        font-size: 0.8rem;
-    }
-    
-    #gameDescription {
-        font-size: 0.8rem;
-    }
-    
-    #gameImage {
-        max-height: 180px;
-    }
-    
-    .btn {
-        font-size: 0.8rem;
-        padding: 8px 16px;
-    }
-    
-    .modal-footer {
-        padding: 0.75rem;
-        gap: 0.5rem;
-    }
-    
-    .modal-footer .btn {
-        flex: 1;
-    }
+  body {
+    padding-top: 55px !important;
+  }
+  
+  .judul {
+    padding: 5px 10px 0 10px;
+  }
+  
+  .judul h1 {
+    font-size: 1.5rem;
+  }
+  
+  .teaser-section {
+    padding: 10px;
+    padding-top: 15px;
+  }
+  
+  .section {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .game-list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .game-card {
+    max-width: 180px;
+    height: 250px;
+    margin-top: 8px;
+  }
+  
+  .placeholder-image {
+    font-size: 12px;
+  }
+  
+  .modal-dialog {
+    margin: 0.25rem !important;
+    max-width: calc(100vw - 0.5rem) !important;
+    width: calc(100vw - 0.5rem) !important;
+  }
+  
+  .modal-body {
+    padding: 1rem !important;
+  }
+  
+  .modal-header {
+    padding: 0.75rem 1rem 0.25rem 1rem;
+  }
+  
+  .modal-footer {
+    padding: 0.25rem 1rem 0.75rem 1rem;
+  }
+  
+  .modal-title {
+    font-size: 1.2rem;
+  }
+  
+  #gameImage {
+    max-height: 200px !important;
+    min-height: 160px !important;
+  }
+  
+  .game-info h6 {
+    font-size: 0.9rem !important;
+    margin-top: 0.6rem !important;
+  }
+  
+  .game-info p {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.6rem !important;
+  }
+  
+  #gameDescription {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .modal-footer .btn {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+  
+  .btn {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+  
+  .modal-footer {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+  
+  .modal-footer .btn {
+    flex: 1;
+  }
 }
 
 @media (max-width: 360px) {
-    body {
-        padding-top: 50px !important;
-    }
-    
-    .judul h1 {
-        font-size: 1.3rem;
-    }
-    
-    .game-card {
-        max-width: 160px;
-        height: 220px;
-    }
+  body {
+    padding-top: 50px !important;
+  }
+  
+  .judul h1 {
+    font-size: 1.3rem;
+  }
+  
+  .game-card {
+    max-width: 160px;
+    height: 220px;
+  }
+  
+  .modal-dialog {
+    margin: 0.1rem !important;
+    max-width: calc(100vw - 0.2rem) !important;
+    width: calc(100vw - 0.2rem) !important;
+  }
+  
+  .modal-title {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+  
+  #gameImage {
+    max-height: 180px !important;
+    min-height: 140px !important;
+  }
+  
+  .game-info h6 {
+    font-size: 0.85rem !important;
+  }
+  
+  .game-info p {
+    font-size: 0.8rem !important;
+  }
+  
+  #gameDescription {
+    font-size: 0.8rem !important;
+  }
 }
