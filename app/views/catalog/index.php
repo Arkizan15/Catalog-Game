@@ -70,7 +70,7 @@
     <link rel="stylesheet" href="<?=BASEURL;?>/css/catalog.css">
     <link rel="stylesheet" href="<?=BASEURL;?>/css/navbar.css">
 </head>
-<body>
+<body class="catalog-page">
   
     
     <div class="judul">

@@ -1,4 +1,4 @@
-/* Library Specific Styles */
+/* Library Specific Styles - UPDATED with Modal Fixes */
 .library-container {
     background: linear-gradient(135deg, #000000, #404040);
     background-attachment: fixed;
@@ -233,10 +233,38 @@
     display: none !important;
 }
 
-/* Modal Styles */
-.modal-content.bg-dark {
+/* ===========================================
+   LIBRARY GAME MODAL STYLES - SPECIFIC TO LIBRARY PAGE
+   =========================================== */
+
+/* Game Modal styles specifically for library page - use same ID as catalog but more specific */
+body.library-page #gameModal .modal-content {
     background: linear-gradient(135deg, #1a1a1a, #2e2e2e) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.library-page #gameModal .modal-title {
+    color: #ffffff !important;
+}
+
+/* Fix text colors for library game modal */
+body.library-page #gameModal .game-info h6 {
+    color: #4dabf7 !important;
+}
+
+body.library-page #gameModal .game-info p {
+    color: #ffffff !important; /* FIXED: Ensure white text */
+}
+
+body.library-page #gameModal #gameDescription {
+    color: #ffffff !important;
+}
+
+body.library-page #gameModal #gameGenre,
+body.library-page #gameModal #gameDeveloper,
+body.library-page #gameModal #gameReleaseDate,
+body.library-page #gameModal #gamePlatform {
+    color: #ffffff !important; /* FIXED: All game info text should be white */
 }
 
 /* Responsive Design */
@@ -252,8 +280,167 @@
 
 @media (max-width: 992px) {
     .library-stats {
+        gap: 2rem;
+    }
+    
+    .library-controls {
+        padding: 12px;
+    }
+    
+    .library-controls .form-control,
+    .library-controls .form-select {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+    
+    .empty-library {
+        padding: 40px 15px;
+    }
+    
+    .empty-library h3 {
+        font-size: 1.3rem;
+    }
+    
+    .empty-library p {
+        font-size: 0.9rem;
+    }
+    
+    .game-actions {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .game-actions .btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        width: 100%;
+    }
+    
+    .game-image-container {
+        height: 140px;
+    }
+    
+    .game-info {
+        padding: 12px;
+    }
+    
+    .game-title {
+        font-size: 1rem;
+        height: 2.4rem;
+    }
+    
+    .game-genre {
+        font-size: 0.8rem;
+    }
+    
+    .game-developer {
+        font-size: 0.75rem;
+    }
+    
+    /* Modal adjustments for mobile */
+    body.library-page #gameModal .modal-dialog {
+        margin: 0.5rem;
+        max-width: 95%;
+    }
+    
+    body.library-page #gameModal .modal-body {
+        padding: 1rem;
+    }
+    
+    body.library-page #gameModal .modal-title {
+        font-size: 1.2rem;
+    }
+    
+    /* Ensure text colors remain white in mobile modal */
+    body.library-page #gameModal .game-info p,
+    body.library-page #gameModal #gameGenre,
+    body.library-page #gameModal #gameDeveloper,
+    body.library-page #gameModal #gameReleaseDate,
+    body.library-page #gameModal #gamePlatform,
+    body.library-page #gameModal #gameDescription {
+        color: #ffffff !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .library-title {
+        font-size: 1.3rem;
+    }
+    
+    .library-stats {
         gap: 1.5rem;
     }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .empty-library {
+        padding: 30px 10px;
+    }
+    
+    .empty-library h3 {
+        font-size: 1.2rem;
+    }
+    
+    .game-image-container {
+        height: 120px;
+    }
+    
+    .game-info {
+        padding: 10px;
+    }
+    
+    .game-title {
+        font-size: 0.9rem;
+        height: 2.2rem;
+    }
+    
+    /* Extra small mobile modal fixes */
+    body.library-page #gameModal .game-info p,
+    body.library-page #gameModal #gameGenre,
+    body.library-page #gameModal #gameDeveloper,
+    body.library-page #gameModal #gameReleaseDate,
+    body.library-page #gameModal #gamePlatform,
+    body.library-page #gameModal #gameDescription {
+        color: #ffffff !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Animation for loading */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-item {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom scrollbar for webkit browsers */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+} 
     
     .stat-number {
         font-size: 1.8rem;
@@ -262,7 +449,7 @@
     .game-image-container {
         height: 180px;
     }
-}
+
 
 @media (max-width: 768px) {
     .library-container {
@@ -354,146 +541,5 @@
     
     .stat-label {
         font-size: 0.8rem;
-    }
-    
-    .library-stats {
-        gap: 2rem;
-    }
-    
-    .library-controls {
-        padding: 12px;
-    }
-    
-    .library-controls .form-control,
-    .library-controls .form-select {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-    
-    .empty-library {
-        padding: 40px 15px;
-    }
-    
-    .empty-library h3 {
-        font-size: 1.3rem;
-    }
-    
-    .empty-library p {
-        font-size: 0.9rem;
-    }
-    
-    .game-actions {
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    .game-actions .btn {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-        width: 100%;
-    }
-    
-    .game-image-container {
-        height: 140px;
-    }
-    
-    .game-info {
-        padding: 12px;
-    }
-    
-    .game-title {
-        font-size: 1rem;
-        height: 2.4rem;
-    }
-    
-    .game-genre {
-        font-size: 0.8rem;
-    }
-    
-    .game-developer {
-        font-size: 0.75rem;
-    }
-    
-    /* Modal adjustments */
-    .modal-dialog {
-        margin: 0.5rem;
-        max-width: 95%;
-    }
-    
-    .modal-body {
-        padding: 1rem;
-    }
-    
-    .modal-title {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 360px) {
-    .library-title {
-        font-size: 1.3rem;
-    }
-    
-    .library-stats {
-        gap: 1.5rem;
-    }
-    
-    .stat-number {
-        font-size: 1.3rem;
-    }
-    
-    .empty-library {
-        padding: 30px 10px;
-    }
-    
-    .empty-library h3 {
-        font-size: 1.2rem;
-    }
-    
-    .game-image-container {
-        height: 120px;
-    }
-    
-    .game-info {
-        padding: 10px;
-    }
-    
-    .game-title {
-        font-size: 0.9rem;
-        height: 2.2rem;
-    }
-}
-
-/* Animation for loading */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.game-item {
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* Custom scrollbar for webkit browsers */
-body::-webkit-scrollbar {
-    width: 8px;
-}
-
-body::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-}
-
-body::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+    } 
 }

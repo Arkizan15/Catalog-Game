@@ -1,4 +1,4 @@
-/* UPDATED NAVBAR.CSS - Replace the existing responsive sections */
+/* UPDATED NAVBAR.CSS - Protected from modal conflicts */
 
 /* Base navbar styles */
 .navbar {
@@ -91,132 +91,143 @@
     transform: scale(1.1);
 }
 
-/* Modal styling */
-.modal {
+/* ===========================================
+   PROFILE MODAL STYLES - PROTECTED FROM GAME MODAL
+   =========================================== */
+
+/* Profile modal - specific ID selector to prevent conflicts */
+#profileModal {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6) !important; /* Higher opacity for distinction */
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: 2500 !important; /* Higher than game modal (2000) */
+    backdrop-filter: blur(3px);
 }
 
-.modal-content {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    width: 350px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    position: relative;
-    animation: modalFadeIn 0.3s ease;
-    margin: 20px;
-    max-width: calc(100vw - 40px);
+/* Profile modal content - specific to avoid conflicts */
+#profileModal .modal-content {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa) !important; /* White gradient */
+    padding: 25px !important;
+    border-radius: 15px !important;
+    width: 350px !important;
+    text-align: center !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4) !important; /* Enhanced shadow */
+    position: relative !important;
+    animation: profileModalFadeIn 0.3s ease !important;
+    margin: 20px !important;
+    max-width: calc(100vw - 40px) !important;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important; /* Subtle border */
 }
 
-@keyframes modalFadeIn {
+@keyframes profileModalFadeIn {
     from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.8) translateY(-20px);
     }
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
     }
 }
 
-.close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 24px;
-    color: #999;
-    transition: color 0.3s ease;
+#profileModal .close {
+    position: absolute !important;
+    top: 15px !important;
+    right: 20px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    font-size: 24px !important;
+    color: #666 !important;
+    transition: color 0.3s ease !important;
+    z-index: 10 !important;
 }
 
-.close:hover {
-    color: #333;
+#profileModal .close:hover {
+    color: #333 !important;
+    transform: scale(1.1) !important;
 }
 
-.modal-content h2 {
-    color: #333;
-    margin-bottom: 10px;
-    font-size: 24px;
+#profileModal .modal-content h2 {
+    color: #333 !important;
+    margin-bottom: 10px !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
 }
 
-.modal-content p {
-    color: #666;
-    margin-bottom: 15px;
-    font-size: 14px;
+#profileModal .modal-content p {
+    color: #666 !important;
+    margin-bottom: 15px !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
 }
 
-/* Modal actions buttons */
-.modal-actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
+/* Profile modal actions buttons */
+#profileModal .modal-actions {
+    margin-top: 20px !important;
+    display: flex !important;
+    gap: 10px !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
 }
 
-.modal-actions button,
-.modal-actions a {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    min-width: 100px;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
+#profileModal .modal-actions button,
+#profileModal .modal-actions a {
+    padding: 10px 20px !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    min-width: 100px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    text-align: center !important;
 }
 
-.btn-primary {
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
+#profileModal .btn-primary {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+    color: white !important;
 }
 
-.btn-primary:hover {
-    background: linear-gradient(135deg, #0056b3, #004085);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-    color: white;
-    text-decoration: none;
+#profileModal .btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3, #004085) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
 }
 
-.btn-danger {
-    background: linear-gradient(135deg, #dc3545, #c82333);
-    color: white;
+#profileModal .btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    color: white !important;
 }
 
-.btn-danger:hover {
-    background: linear-gradient(135deg, #c82333, #bd2130);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-    color: white;
-    text-decoration: none;
+#profileModal .btn-danger:hover {
+    background: linear-gradient(135deg, #c82333, #bd2130) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(220, 53, 69, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
 }
 
-.btn-success {
-    background: linear-gradient(135deg, #28a745, #20c997);
-    color: white;
+#profileModal .btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    color: white !important;
 }
 
-.btn-success:hover {
-    background: linear-gradient(135deg, #218838, #1ba085);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
-    color: white;
-    text-decoration: none;
+#profileModal .btn-success:hover {
+    background: linear-gradient(135deg, #218838, #1ba085) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
 }
 
 /* Mobile burger menu */
@@ -351,20 +362,21 @@
         font-size: 28px;
     }
 
-    .modal-content {
-        width: calc(100vw - 40px);
-        max-width: 320px;
-        padding: 20px;
+    /* Profile modal responsive for mobile */
+    #profileModal .modal-content {
+        width: calc(100vw - 40px) !important;
+        max-width: 320px !important;
+        padding: 20px !important;
     }
 
-    .modal-actions {
-        flex-direction: column;
-        gap: 8px;
+    #profileModal .modal-actions {
+        flex-direction: column !important;
+        gap: 8px !important;
     }
 
-    .modal-actions button,
-    .modal-actions a {
-        width: 100%;
+    #profileModal .modal-actions button,
+    #profileModal .modal-actions a {
+        width: 100% !important;
     }
 }
 
@@ -390,20 +402,20 @@
         font-size: 26px;
     }
 
-    .modal-content {
-        padding: 15px;
-        margin: 15px;
+    #profileModal .modal-content {
+        padding: 15px !important;
+        margin: 15px !important;
     }
 
-    .modal-content h2 {
-        font-size: 20px;
+    #profileModal .modal-content h2 {
+        font-size: 20px !important;
     }
 
-    .modal-actions button,
-    .modal-actions a {
-        padding: 8px 16px;
-        font-size: 13px;
-        min-width: auto;
+    #profileModal .modal-actions button,
+    #profileModal .modal-actions a {
+        padding: 8px 16px !important;
+        font-size: 13px !important;
+        min-width: auto !important;
     }
 }
 
@@ -416,5 +428,20 @@
 
     .nav-menu {
         top: 50px;
+    }
+    
+    #profileModal .modal-content {
+        width: calc(100vw - 20px) !important;
+        max-width: none !important;
+        padding: 12px !important;
+        margin: 10px !important;
+    }
+    
+    #profileModal .modal-content h2 {
+        font-size: 18px !important;
+    }
+    
+    #profileModal .modal-content p {
+        font-size: 13px !important;
     }
 }

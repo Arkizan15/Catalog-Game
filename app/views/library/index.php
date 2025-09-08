@@ -67,7 +67,7 @@
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/library.css">
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/navbar.css">
 </head>
-<body>
+<body class="library-page">
    
 
     <div class="container-fluid library-container">
