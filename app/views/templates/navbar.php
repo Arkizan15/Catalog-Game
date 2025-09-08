@@ -46,7 +46,7 @@
            <?php else: ?>
                <h2>Guest User</h2>
                <p>Silakan login untuk mengakses fitur lengkap.</p>
-               <div class="modal-actions">
+save              <div class="modal-actions">
                    <a href="<?=BASEURL;?>auth" class="btn btn-primary">Login</a>
                    <a href="<?=BASEURL;?>auth/register" class="btn btn-success">Register</a>
                </div>

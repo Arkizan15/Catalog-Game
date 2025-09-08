@@ -177,7 +177,7 @@ body::-webkit-scrollbar {
 #gameDescription {
   text-align: left !important;
   line-height: 1.7;
-  color: #f8f9fa;
+  color: #ffffff;
 }
 
 #gameImage {
@@ -322,7 +322,7 @@ body::-webkit-scrollbar {
     font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 1.8rem;
-    color: #f8f9fa;
+    color: #ffffff;
   }
   
   #gameDescription {
@@ -501,7 +501,7 @@ body::-webkit-scrollbar {
     font-size: 0.9rem !important;
     margin-bottom: 0.8rem !important;
     line-height: 1.5;
-    color: #f0f0f0;
+    color: #ffffff !important; 
   }
   
   #gameDescription {

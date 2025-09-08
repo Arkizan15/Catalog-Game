@@ -21,17 +21,7 @@
             overflow-x: hidden;
         }
         
-        .navbar {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100vw !important;
-            margin: 0 !important;
-            z-index: 1000 !important;
-            height: 65px !important;
-        }
-        
+       
         body {
             padding-top: 65px !important;
         }
@@ -108,7 +98,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="col-12 text-center">
-                        <p class="text-muted">Tidak ada game yang ditemukan.</p>
+                        <p class="text">Tidak ada game yang ditemukan.</p>
                     </div>
                 <?php endif; ?>
             </div>
