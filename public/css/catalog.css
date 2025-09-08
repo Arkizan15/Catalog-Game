@@ -273,7 +273,7 @@ body::-webkit-scrollbar {
   }
   
   #gameModal .modal-content {
-    min-height: 500px !important; /* Reduced from 700px */
+    min-height: 600px !important; /* Reduced from 700px */
     max-height: 85vh !important; /* Added max-height to prevent overflow */
     border-radius: 15px !important;
     width: 100% !important;
@@ -281,7 +281,7 @@ body::-webkit-scrollbar {
   
   #gameModal .modal-body {
     padding: 2rem 3rem !important; /* Reduced padding */
-    max-height: calc(100vh - 200px) !important; /* Prevent body overflow */
+    max-height: calc(140vh - 200px) !important; /* Prevent body overflow */
     overflow-y: auto !important; 
     overflow: hidden;/* Add scroll if needed */
   }
