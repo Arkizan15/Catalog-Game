@@ -3,72 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $data['judul']; ?> - Kiki's Catalog Game</title>
+    <title><?= htmlspecialchars($data['judul']); ?> - Kiki's Catalog Game</title>
+
+    <!-- ✅ Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- CRITICAL: Inline CSS fix for navbar gap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- ✅ Reset & Layout Fix -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         html, body {
             margin: 0 !important;
             padding: 0 !important;
             overflow-x: hidden;
         }
-        
+
         .navbar {
             position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100vw !important;
-            margin: 0 !important;
-            z-index: 1000 !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
             height: 65px !important;
         }
-        
-        body {
-            padding-top: 65px !important;
-        }
-        
-        .library-container {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-        
-        .library-header {
-            margin-top: 0 !important;
-        }
-        
+
+        body { padding-top: 65px !important; }
+
         @media (max-width: 768px) {
-            .navbar {
-                height: 55px !important;
-            }
-            body {
-                padding-top: 55px !important;
-            }
+            .navbar { height: 55px !important; }
+            body { padding-top: 55px !important; }
         }
-        
+
         @media (max-width: 480px) {
-            .navbar {
-                height: 50px !important;
-            }
-            body {
-                padding-top: 50px !important;
-            }
+            .navbar { height: 50px !important; }
+            body { padding-top: 50px !important; }
         }
     </style>
-    
-    <link rel="stylesheet" href="<?= BASEURL; ?>/css/catalog.css">
-    <link rel="stylesheet" href="<?= BASEURL; ?>/css/library.css">
-    <link rel="stylesheet" href="<?= BASEURL; ?>/css/navbar.css">
+
+    <!-- ✅ Custom CSS -->
+    <link rel="stylesheet" href="<?= rtrim(BASEURL,'/') ?>/assets/css/catalog.css">
+    <link rel="stylesheet" href="<?= rtrim(BASEURL,'/') ?>/assets/css/library.css">
+    <link rel="stylesheet" href="<?= rtrim(BASEURL,'/') ?>/assets/css/navbar.css">
 </head>
+
 <body class="library-page">
-   
 
     <div class="container-fluid library-container">
         <!-- Header -->
@@ -77,7 +57,9 @@
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <h1 class="library-title">My Library</h1>
-                        <p class="library-subtitle">Welcome back, <?= htmlspecialchars($data['username']); ?>!</p>
+                        <p class="library-subtitle">
+                            Welcome back, <?= htmlspecialchars($data['username']); ?>!
+                        </p>
                     </div>
                     <div class="col-md-4 text-end">
                         <div class="library-stats">
@@ -97,21 +79,23 @@
             </div>
         </div>
 
-        <!-- Library Content -->
+        <!-- Content -->
         <div class="library-content">
             <div class="container">
+
                 <?php if (empty($data['games'])): ?>
-                    <!-- Empty Library State -->
+                    <!-- Empty state -->
                     <div class="empty-library text-center">
                         <div class="empty-icon">
                             <i class="bi bi-collection"></i>
                         </div>
                         <h3>Library Kosong</h3>
-                        <p>Anda belum menambahkan game apapun ke library. Mulai jelajahi katalog dan tambahkan game favorit Anda!</p>
+                        <p>Anda belum menambahkan game apapun ke library.</p>
                         <a href="<?= BASEURL; ?>catalog" class="btn btn-primary btn-lg">Jelajahi Katalog</a>
                     </div>
+
                 <?php else: ?>
-                    <!-- Filter and Sort Options -->
+                    <!-- Filter -->
                     <div class="library-controls mb-4">
                         <div class="row align-items-center">
                             <div class="col-md-6">
@@ -137,20 +121,23 @@
                         </div>
                     </div>
 
-                    <!-- Games Grid -->
+                    <!-- ✅ Game Cards -->
                     <div class="library-games">
                         <div class="row" id="gamesContainer">
                             <?php foreach ($data['games'] as $game): ?>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4 game-item" 
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4 game-item"
+                                     data-id="<?= $game['id']; ?>"
                                      data-title="<?= strtolower($game['judul']); ?>"
                                      data-genre="<?= strtolower($game['genre']); ?>"
                                      data-developer="<?= strtolower($game['developer']); ?>"
                                      data-added="<?= $game['added_at']; ?>">
                                     <div class="library-game-card">
                                         <div class="game-image-container">
-                                            <img src="<?= BASEURL; ?>/img/<?= $game['image']; ?>" 
-                                                 alt="<?= htmlspecialchars($game['judul']); ?>" 
-                                                 class="game-image">
+                                            <!-- ✅ Perbaikan path gambar -->
+                                            <img src="<?= rtrim(BASEURL,'/') ?>/assets/img/<?= htmlspecialchars($game['image']); ?>"
+                                                 alt="<?= htmlspecialchars($game['judul']); ?>"
+                                                 class="game-image"
+                                                 onerror="this.onerror=null; this.src='<?= rtrim(BASEURL,'/') ?>/assets/img/default.jpg';">
                                             <div class="game-overlay">
                                                 <div class="game-actions">
                                                     <button class="btn btn-primary btn-sm" onclick="viewGameDetails(<?= $game['id']; ?>)">
@@ -180,13 +167,13 @@
         </div>
     </div>
 
-    <!-- Game Details Modal -->
+    <!-- ✅ Modal -->
     <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="gameModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header border-secondary">
                     <h5 class="modal-title" id="gameModalLabel">Game Title</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -196,17 +183,17 @@
                         <div class="col-md-8">
                             <div class="game-info">
                                 <h6 class="text-primary">Genre:</h6>
-                                <p id="gameGenre" class="mb-2"></p>
-                                
+                                <p id="gameGenre"></p>
+
                                 <h6 class="text-primary">Developer:</h6>
-                                <p id="gameDeveloper" class="mb-2"></p>
-                                
+                                <p id="gameDeveloper"></p>
+
                                 <h6 class="text-primary">Release Date:</h6>
-                                <p id="gameReleaseDate" class="mb-2"></p>
-                                
+                                <p id="gameReleaseDate"></p>
+
                                 <h6 class="text-primary">Platform:</h6>
-                                <p id="gamePlatform" class="mb-3"></p>
-                                
+                                <p id="gamePlatform"></p>
+
                                 <h6 class="text-primary">Description:</h6>
                                 <p id="gameDescription"></p>
                             </div>
@@ -214,33 +201,23 @@
                     </div>
                 </div>
                 <div class="modal-footer border-secondary">
-                    <button type="button" class="btn btn-danger" onclick="removeFromLibraryModal()">Remove from Library</button>
+                    <button type="button" class="btn btn-danger" onclick="removeFromLibraryModal()">Remove</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Loading indicator -->
+    <!-- ✅ Loading Spinner -->
     <div id="loadingIndicator" class="d-none position-fixed top-50 start-50 translate-middle">
         <div class="spinner-border text-light" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- ✅ Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Pass data to JavaScript -->
-    <script>
-        window.BASEURL = '<?= BASEURL; ?>';
-        let currentGameId = null;
-    </script>
-    
-    <!-- Library JS -->
-    <script src="<?= BASEURL; ?>/js/library.js"></script>
-    
-    <!-- Include Footer -->
-   
+    <script>window.BASEURL = '<?= rtrim(BASEURL,'/') . '/' ?>';</script>
+    <script src="<?= rtrim(BASEURL,'/') ?>/assets/js/library.js"></script>
 </body>
 </html>

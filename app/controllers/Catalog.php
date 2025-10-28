@@ -40,7 +40,7 @@ class Catalog extends Controller {
                 'releaseDate' => $game['rilis'],
                 'platform' => $game['platform'],
                 'description' => $game['description'],
-                'image' => 'img/' . $gameModel->getGameImage($game['judul']),
+                'image' => 'assets/img/' . $gameModel->getGameImage($game['judul']),
                 'slug' => $gameModel->titleToSlug($game['judul'])
             ];
             

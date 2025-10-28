@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalog</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- CRITICAL: Inline CSS fix for navbar gap -->
     <style>
         * {
@@ -67,8 +67,8 @@
         }
     </style>
     
-    <link rel="stylesheet" href="<?=BASEURL;?>/css/catalog.css">
-    <link rel="stylesheet" href="<?=BASEURL;?>/css/navbar.css">
+    <link rel="stylesheet" href="<?=BASEURL;?>assets/css/catalog.css">
+    <link rel="stylesheet" href="<?=BASEURL;?>assets/css/navbar.css">
 </head>
 <body class="catalog-page">
   
@@ -92,7 +92,7 @@
                         ?>
                         <div class="game-card" data-game="<?= $game['id']; ?>" data-slug="<?= $slug; ?>">
                             <div class="placeholder-image">
-                                <img src="<?=BASEURL;?>/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
+                                <img src="<?=BASEURL;?>assets/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -175,7 +175,7 @@
     </script>
     
     <!-- Game Catalog JS -->
-    <script src="<?=BASEURL;?>/js/catalog.js"></script>
+    <script src="<?=BASEURL;?>assets/js/catalog.js"></script>
     
 
 </body>

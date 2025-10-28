@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiki's Catalog Game</title>
-    <link rel="stylesheet" href="<?= BASEURL;?>/css/home.css">
-    <link rel="stylesheet" href="<?= BASEURL;?>/css/teaser.css">
-    <link rel="stylesheet" href="<?= BASEURL;?>/css/header.css">
+    <link rel="stylesheet" href="<?= BASEURL;?>assets/css/home.css">
+    <link rel="stylesheet" href="<?= BASEURL;?>assets/css/teaser.css">
+    <link rel="stylesheet" href="<?= BASEURL;?>assets/css/header.css">
     
 </head>
 <body>
     <!-- Landing Section -->
     <div class="landing-container">
-        <img src="<?= BASEURL;?>/img/hollow-knight-bg.jpg" alt="Background" class="background-image">
+        <img src="<?= BASEURL;?>assets/img/hollow-knight-bg.jpg" alt="Background" class="background-image">
 
         <!-- Navbar -->
         
@@ -77,7 +77,7 @@
                     ?>
                     <div class="game-card" data-game="<?= $game['id']; ?>" onclick="goToGame('<?= $game['id']; ?>')">
                         <div class="placeholder-image">
-                            <img src="<?=BASEURL;?>/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
+                            <img src="<?=BASEURL;?>assets/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -98,7 +98,7 @@
                     ?>
                     <div class="game-card" data-game="<?= $game['id']; ?>" onclick="goToGame('<?= $game['id']; ?>')">
                         <div class="placeholder-image">
-                            <img src="<?=BASEURL;?>/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
+                            <img src="<?=BASEURL;?>assets/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -134,13 +134,13 @@
             const images = document.querySelectorAll('.game-card img');
             images.forEach(img => {
                 img.addEventListener('error', function() {
-                    this.src = window.BASEURL + '/img/default.jpg';
+                    this.src = window.BASEURL + 'assets/img/default.jpg';
                     this.alt = 'Image not found';
                 });
             });
         });
     </script>
     
-    <script src="<?= BASEURL;?>/js/teaser.js"></script>
+    <script src="<?= BASEURL;?>assets/js/teaser.js"></script>
 </body>
 </html>
