@@ -82,7 +82,7 @@ class Home extends Controller {
                 'releaseDate' => $game['rilis'],
                 'platform' => $game['platform'],
                 'description' => $game['description'],
-                'image' => 'img/' . $gameModel->getGameImage($game['judul']),
+                'image' => 'uploads/games/' . $gameModel->getGameImage($game['judul'], $game['image_path'] ?? null),
                 'slug' => $gameModel->titleToSlug($game['judul'])
             ];
         }

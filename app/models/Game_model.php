@@ -173,9 +173,17 @@ class Game_model {
 
     // ========== GAMBAR GAME ==========
 
-    public function getGameImage($title) {
-        $norm = strtolower(trim($title));
+    public function getGameImage($title, $imagePath = null) {
+        // Prioritas 1: Jika ada image_path dari database
+        if (!empty($imagePath)) {
+            $filePath = __DIR__ . '/../../public/uploads/games/' . $imagePath;
+            if (file_exists($filePath)) {
+                return $imagePath; // Return filename saja
+            }
+        }
 
+        // Prioritas 2: Cari di mapping
+        $norm = strtolower(trim($title));
         $imageMapping = [
             'a space for the unbound' => 'ASTFU.jpg',
             'blasphemous 2' => 'bp2.jpg',
@@ -192,19 +200,11 @@ class Game_model {
             'ultraman fighting evolution 3' => 'fe3.jpg'
         ];
 
-        // cek apakah ada di mapping
         if (isset($imageMapping[$norm])) {
             return $imageMapping[$norm];
         }
 
-        // fallback: jika file ada di folder img pakai langsung
-        $fileName = strtolower(str_replace(' ', '_', $title)) . '.jpg';
-        $path = __DIR__ . '/../../public/assets/img/' . $fileName;
-        if (file_exists($path)) {
-            return $fileName;
-        }
-
-        // fallback terakhir
+        // Prioritas 3: Fallback
         return 'default.jpg';
     }
 }

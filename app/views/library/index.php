@@ -134,7 +134,7 @@
                                     <div class="library-game-card">
                                         <div class="game-image-container">
                                             <!-- ✅ Perbaikan path gambar -->
-                                            <img src="<?= rtrim(BASEURL,'/') ?>/assets/img/<?= htmlspecialchars($game['image']); ?>"
+                                            <img src="<?= rtrim(BASEURL,'/') ?>/uploads/games/<?= htmlspecialchars($game['image']); ?>"
                                                  alt="<?= htmlspecialchars($game['judul']); ?>"
                                                  class="game-image"
                                                  onerror="this.onerror=null; this.src='<?= rtrim(BASEURL,'/') ?>/assets/img/default.jpg';">
