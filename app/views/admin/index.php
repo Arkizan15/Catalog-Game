@@ -24,8 +24,8 @@
 <!-- [Material Icons] https://fonts.google.com/icons -->
 <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/material.css" >
 <!-- [Template CSS Files] -->
-<link rel="stylesheet" href="<?= BASEURL?>assets/css/style.css" id="main-style-link" >
-<link rel="stylesheet" href="<?= BASEURL?>assets/css/style-preset.css" >
+<link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style.css" id="main-style-link" >
+<link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style-preset.css" >
 
 </head>
 <!-- [Head] end -->
@@ -47,7 +47,7 @@
         <!-- ========   Change your logo from here   ============ -->
         <!-- <img src="<?= BASEURL?>assets/images/logo-icon.svg" class="img-fluid logo-lg" alt="logo"> -->
       </a>
-      <img src="<?= BASEURL?>assets/images/logo-icon.svg" class="img-fluid logo-lg" alt="logo">
+      <img src="<?= BASEURL?>assets//img/images_admin/logo-icon.svg" class="img-fluid logo-lg" alt="logo">
     </div>
     <div class="navbar-content">
       <ul class="pc-navbar">
@@ -221,8 +221,7 @@
         data-bs-auto-close="outside"
         aria-expanded="false"
       >
-        <img src=".<?= BASEURL?>assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-        <span>Stebin Ben</span>
+       
       </a>
       <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
         <div class="dropdown-header">
@@ -345,7 +344,7 @@
       <!-- [ Main Content ] start -->
       
         <?php 
-            include "<?= BASEURL?>admin-page/dashboard.php"
+            include "dashboard.php"
         ?>
 
     </div>

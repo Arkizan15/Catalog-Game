@@ -1,44 +1,51 @@
 <?php
 
 class Auth extends Controller {
-    
+
     public function index() {
         if (isset($_SESSION['user_id'])) {
             header('Location: ' . BASEURL . 'home');
             exit();
         }
-        
+
         $data['judul'] = 'Login';
         $data['error'] = $_SESSION['error'] ?? '';
         $data['success'] = $_SESSION['success'] ?? '';
         unset($_SESSION['error'], $_SESSION['success']);
-        
+
         $this->view('auth/login', $data);
     }
 
     public function login() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-            $password = $_POST['password'];
-
-            if ($this->validateLogin($username, $password)) {
-                $user = $this->model('User_model')->login($username, $password);
-                
-                if ($user) {
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['username'] = $user['username'];
-                    $_SESSION['logged_in'] = true;
-                    
-                    header('Location: ' . BASEURL . 'home');
-                    exit();
-                } else {
-                    $_SESSION['error'] = 'Username atau password salah';
-                }
-            }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ' . BASEURL . 'auth');
+            exit();
         }
-        
-        header('Location: ' . BASEURL . 'auth');
-        exit();
+
+        $username = htmlspecialchars(trim($_POST['username'] ?? ''));
+        $password = $_POST['password'] ?? '';
+
+        if (!$this->validateLogin($username, $password)) {
+            header('Location: ' . BASEURL . 'auth');
+            exit();
+        }
+
+        $userModel = $this->model('User_model');
+        $user = $userModel->login($username, $password); // model supports (username, password) or array
+
+        if ($user) {
+     $_SESSION['logged_in'] = true;
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['is_admin'] = $user['is_admin'] ?? 0;
+
+            header('Location: ' . BASEURL . 'home');
+            exit();
+        } else {
+            $_SESSION['error'] = 'Username atau password salah';
+            header('Location: ' . BASEURL . 'auth');
+            exit();
+        }
     }
 
     public function register() {
@@ -47,36 +54,59 @@ class Auth extends Controller {
             exit();
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-            $password = $_POST['password'];
-            $confirm_password = $_POST['confirm_password'];
-
-            if ($this->validateRegister($username, $password, $confirm_password)) {
-                $userModel = $this->model('User_model');
-                
-                if (!$userModel->usernameExists($username)) {
-                    if ($userModel->register($username, $password)) {
-                        $_SESSION['success'] = 'Registrasi berhasil. Silakan login.';
-                        header('Location: ' . BASEURL . 'auth');
-                        exit();
-                    } else {
-                        $_SESSION['error'] = 'Registrasi gagal. Silakan coba lagi.';
-                    }
-                } else {
-                    $_SESSION['error'] = 'Username sudah digunakan';
-                }
-            }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $data['judul'] = 'Register';
+            $data['error'] = $_SESSION['error'] ?? '';
+            unset($_SESSION['error']);
+            $this->view('auth/register', $data);
+            return;
         }
 
-        $data['judul'] = 'Register';
-        $data['error'] = $_SESSION['error'] ?? '';
-        unset($_SESSION['error']);
-        
-        $this->view('auth/register', $data);
+        $username = htmlspecialchars(trim($_POST['username'] ?? ''));
+        $password = $_POST['password'] ?? '';
+        $confirm_password = $_POST['confirm_password'] ?? '';
+
+        if (!$this->validateRegister($username, $password, $confirm_password)) {
+            header('Location: ' . BASEURL . 'auth/register');
+            exit();
+        }
+
+        $userModel = $this->model('User_model');
+
+        // jika username belum dipakai -> register
+        if (!$userModel->checkUsernameExists($username)) {
+            $data = [
+                'username' => $username,
+                'password' => $password
+            ];
+
+            $ok = $userModel->register($data);
+            if ($ok) {
+                $_SESSION['success'] = 'Registrasi berhasil. Silakan login.';
+                header('Location: ' . BASEURL . 'auth');
+                exit();
+            } else {
+                $_SESSION['error'] = 'Registrasi gagal. Silakan coba lagi.';
+                header('Location: ' . BASEURL . 'auth/register');
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = 'Username sudah digunakan';
+            header('Location: ' . BASEURL . 'auth/register');
+            exit();
+        }
     }
 
     public function logout() {
+        // clear session safely
+        $_SESSION = [];
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
         session_destroy();
         header('Location: ' . BASEURL . 'auth');
         exit();
@@ -131,4 +161,5 @@ class Auth extends Controller {
             exit();
         }
     }
+    
 }

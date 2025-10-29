@@ -445,3 +445,77 @@
         font-size: 13px !important;
     }
 }
+/* Tambahkan style ini ke file navbar.css yang sudah ada */
+
+/* Admin Link in Menu */
+.nav-menu .admin-link {
+    color: #ffd700 !important;
+    font-weight: 600;
+    position: relative;
+}
+
+.nav-menu .admin-link::before {
+    content: "★ ";
+    margin-right: 4px;
+}
+
+.nav-menu .admin-link:hover {
+    color: #ffed4e !important;
+}
+
+/* Admin Badge in Navbar Right */
+.admin-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    margin-right: 12px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.admin-badge:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+/* Admin Badge in Modal */
+.admin-badge-modal {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* Modal Button Warning (for Admin Panel) */
+.modal-actions .btn-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+}
+
+.modal-actions .btn-warning:hover {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-badge {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        margin-right: 8px;
+    }
+}

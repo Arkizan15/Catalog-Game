@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 09, 2025 at 03:14 AM
+-- Generation Time: Oct 29, 2025 at 01:20 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.29
 
@@ -54,48 +54,6 @@ INSERT INTO `games` (`id`, `judul`, `rilis`, `genre`, `platform`, `description`,
 (10, 'Ultraman Fighting Evolution 3', '9 December 2004', 'Fighting', 'PlayStation 2', 'Ultraman Fighting Evolution 3 adalah game pertarungan berbasis karakter Ultraman dengan berbagai mode cerita dan karakter dari seri Ultraman klasik hingga modern.', 'Banpresto'),
 (11, 'Undertale', '15 September 2015', 'RPG, Indie', 'PC (Windows, macOS, Linux), PS4, PS Vita, Nintendo Switch, Xbox One', 'Undertale adalah RPG indie karya Toby Fox yang terkenal dengan sistem pertarungan uniknya, di mana pemain bisa memilih untuk bertarung atau berbelas kasih pada musuh. Ceritanya penuh humor, misteri, dan pilihan moral yang memengaruhi jalannya permainan.', 'Toby Fox');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `id` int NOT NULL,
-  `username` varchar(70) NOT NULL,
-  `password` varchar(70) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `username`, `password`) VALUES
-(1, 'kiki', '$2y$10$jd9ENiwlIKDUXD6/.98Zz.GWocKKssbxX/BoHQBF9HbV.eVu0xAw.');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_library`
---
-
-CREATE TABLE `user_library` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `game_id` int NOT NULL,
-  `added_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `user_library`
---
-
-INSERT INTO `user_library` (`id`, `user_id`, `game_id`, `added_at`) VALUES
-(5, 1, 1, '2025-09-06 00:25:38'),
-(8, 1, 7, '2025-09-08 01:47:27'),
-(9, 1, 8, '2025-09-08 01:49:12'),
-(10, 1, 6, '2025-09-08 01:49:37');
-
 --
 -- Indexes for dumped tables
 --
@@ -107,20 +65,6 @@ ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`,`username`);
-
---
--- Indexes for table `user_library`
---
-ALTER TABLE `user_library`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_user_game` (`user_id`,`game_id`),
-  ADD KEY `fk_game` (`game_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -129,29 +73,6 @@ ALTER TABLE `user_library`
 --
 ALTER TABLE `games`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user_library`
---
-ALTER TABLE `user_library`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `user_library`
---
-ALTER TABLE `user_library`
-  ADD CONSTRAINT `fk_game` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

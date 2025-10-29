@@ -20,11 +20,19 @@
                <li><a href="<?=BASEURL;?>home">Home</a></li>
                <li><a href="<?=BASEURL;?>catalog">Games</a></li>
                <li><a href="<?=BASEURL;?>library">Library</a></li>
+               <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                   <li><a href="<?=BASEURL;?>admin" class="admin-link">Admin Panel</a></li>
+               <?php endif; ?>
            </ul>
        </div>
            
        <div class="navbar-right">
            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
+               <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                   <a href="<?=BASEURL;?>admin" class="admin-badge" title="Admin Panel">
+                       <i class="bi bi-shield-check"></i>
+                   </a>
+               <?php endif; ?>
                <i class="akun bi bi-person-circle" onclick="openAccount()"></i>
            <?php else: ?>
                <a href="<?=BASEURL;?>auth" class="login-link">Login</a>
@@ -38,15 +46,21 @@
            <span class="close" onclick="closeModal()">&times;</span>
            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
                <h2><?= htmlspecialchars($_SESSION['username']); ?></h2>
+               <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                   <span class="admin-badge-modal">Admin</span>
+               <?php endif; ?>
                <p>Selamat datang di Kiki's Catalog Game!</p>
                <div class="modal-actions">
                    <a href="<?=BASEURL;?>library" class="btn btn-primary">My Library</a>
+                   <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                       <a href="<?=BASEURL;?>admin" class="btn btn-warning">Admin Panel</a>
+                   <?php endif; ?>
                    <a href="<?=BASEURL;?>auth/logout" class="btn btn-danger">Logout</a>
                </div>
            <?php else: ?>
                <h2>Guest User</h2>
                <p>Silakan login untuk mengakses fitur lengkap.</p>
-save              <div class="modal-actions">
+               <div class="modal-actions">
                    <a href="<?=BASEURL;?>auth" class="btn btn-primary">Login</a>
                    <a href="<?=BASEURL;?>auth/register" class="btn btn-success">Register</a>
                </div>
