@@ -2,7 +2,7 @@
   <div class="navbar-wrapper">
     <div class="m-header">
       <a href="<?= BASEURL?>admin" class="b-brand text-primary">
-        <img src="<?= BASEURL?>assets/images/logo-icon.svg" class="img-fluid logo-lg" alt="logo">
+        <img src="<?= BASEURL?>assets/img/images_admin/logo-icon.svg" class="img-fluid logo-lg" alt="logo">
         <span class="badge bg-warning ms-2">Admin</span>
       </a>
     </div>

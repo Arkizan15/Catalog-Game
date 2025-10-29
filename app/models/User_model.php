@@ -1,6 +1,5 @@
 <?php
 class User_model {
-    // sesuaikan dengan dump SQL: tabel bernama `user`
     private $table = 'user';
     private $db;
 
@@ -8,13 +7,7 @@ class User_model {
         $this->db = new Database();
     }
 
-    /**
-     * Login
-     * Menerima either:
-     *  - array ['username'=>..., 'password'=>...]  (dipakai bila controller pass $_POST)
-     *  - atau dua parameter (username, password)
-     * Mengembalikan user array jika berhasil, false jika gagal.
-     */
+    // Login
     public function login($credentials, $maybePassword = null) {
         if (is_array($credentials)) {
             $username = $credentials['username'] ?? null;
@@ -32,21 +25,14 @@ class User_model {
         $this->db->bind(':username', $username);
         $user = $this->db->single();
 
-        if ($user) {
-            // password di DB sudah di-hash (lihat dump: bcrypt hash)
-            if (password_verify($password, $user['password'])) {
-                return $user;
-            }
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
         }
 
         return false;
     }
 
-    /**
-     * Register user baru
-     * $data = ['username'=>..., 'password'=>... , 'confirm'=>..., 'email'=>...] (email optional)
-     * Mengembalikan inserted rowCount (1 jika sukses) atau false.
-     */
+    // Register
     public function register($data) {
         $username = $data['username'] ?? null;
         $password = $data['password'] ?? null;
@@ -64,14 +50,20 @@ class User_model {
         return $this->db->rowCount() > 0;
     }
 
-    /** Ambil user by id */
+    // ✅ GET ALL USERS
+    public function getAllUsers() {
+        $this->db->query("SELECT id, username, is_admin FROM {$this->table} ORDER BY id ASC");
+        return $this->db->resultSet();
+    }
+
+    // Get user by id
     public function getUserById($id) {
         $this->db->query("SELECT * FROM {$this->table} WHERE id = :id LIMIT 1");
         $this->db->bind(':id', $id);
         return $this->db->single();
     }
 
-    /** Cek username ada atau tidak */
+    // Check username exists
     public function checkUsernameExists($username) {
         $this->db->query("SELECT COUNT(*) AS cnt FROM {$this->table} WHERE username = :username");
         $this->db->bind(':username', $username);
@@ -79,7 +71,36 @@ class User_model {
         return isset($row['cnt']) && (int)$row['cnt'] > 0;
     }
 
-    /** Optional: update password (hashing done here) */
+    // ✅ TOGGLE ADMIN STATUS
+    public function toggleAdmin($userId) {
+        // Get current status
+        $this->db->query("SELECT is_admin FROM {$this->table} WHERE id = :id");
+        $this->db->bind(':id', $userId);
+        $user = $this->db->single();
+        
+        if (!$user) return false;
+        
+        // Toggle status
+        $newStatus = $user['is_admin'] == 1 ? 0 : 1;
+        
+        $this->db->query("UPDATE {$this->table} SET is_admin = :status WHERE id = :id");
+        $this->db->bind(':status', $newStatus);
+        $this->db->bind(':id', $userId);
+        $this->db->execute();
+        
+        return $this->db->rowCount() > 0;
+    }
+
+    // ✅ DELETE USER
+    public function deleteUser($userId) {
+        $this->db->query("DELETE FROM {$this->table} WHERE id = :id");
+        $this->db->bind(':id', $userId);
+        $this->db->execute();
+        
+        return $this->db->rowCount() > 0;
+    }
+
+    // Update password
     public function updatePassword($userId, $newPassword) {
         $hash = password_hash($newPassword, PASSWORD_DEFAULT);
         $this->db->query("UPDATE {$this->table} SET password = :pwd WHERE id = :id");

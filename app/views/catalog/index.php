@@ -88,11 +88,11 @@
                         <?php 
                             $gameModel = new Game_model();
                             $slug = $gameModel->titleToSlug($game['judul']);
-                            $imagePath = $gameModel->getGameImage($game['judul']);
+                            $imagePath = $gameModel->getGameImage($game['judul'], $game['image_path'] ?? null);
                         ?>
                         <div class="game-card" data-game="<?= $game['id']; ?>" data-slug="<?= $slug; ?>">
                             <div class="placeholder-image">
-                                <img src="<?=BASEURL;?>assets/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
+                                <img src="<?=BASEURL;?>uploads/games/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -71,13 +71,13 @@
             </div>
             <div class="game-list">
                 <?php foreach ($mostLikedGames as $game): ?>
-                    <?php 
+                    <?php
                         $slug = $gameModel->titleToSlug($game['judul']);
-                        $imagePath = $gameModel->getGameImage($game['judul']);
+                        $imagePath = $gameModel->getGameImage($game['judul'], $game['image_path'] ?? null);
                     ?>
                     <div class="game-card" data-game="<?= $game['id']; ?>" onclick="goToGame('<?= $game['id']; ?>')">
                         <div class="placeholder-image">
-                            <img src="<?=BASEURL;?>assets/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
+                            <img src="<?=BASEURL;?>uploads/games/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -92,13 +92,13 @@
             </div>
             <div class="game-list">
                 <?php foreach ($pixelGames as $game): ?>
-                    <?php 
+                    <?php
                         $slug = $gameModel->titleToSlug($game['judul']);
-                        $imagePath = $gameModel->getGameImage($game['judul']);
+                        $imagePath = $gameModel->getGameImage($game['judul'], $game['image_path'] ?? null);
                     ?>
                     <div class="game-card" data-game="<?= $game['id']; ?>" onclick="goToGame('<?= $game['id']; ?>')">
                         <div class="placeholder-image">
-                            <img src="<?=BASEURL;?>assets/img/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
+                            <img src="<?=BASEURL;?>uploads/games/<?= $imagePath; ?>" alt="<?= htmlspecialchars($game['judul']); ?>">
                         </div>
                     </div>
                 <?php endforeach; ?>
