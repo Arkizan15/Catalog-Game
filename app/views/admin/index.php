@@ -68,14 +68,15 @@
           <div class="col-md-6 col-lg-4 mb-3">
             <div class="card game-card">
               <?php if (!empty($game['image_path'])): ?>
-                <img src="<?= BASEURL?>uploads/games/<?= htmlspecialchars($game['image_path']); ?>" 
-                     class="card-img-top" 
+                <img src="<?= BASEURL?>uploads/games/<?= htmlspecialchars($game['image_path']); ?>"
+                     class="card-img-top"
                      alt="<?= htmlspecialchars($game['judul']); ?>"
                      style="height: 200px; object-fit: cover;">
               <?php else: ?>
-                <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
-                  No Image
-                </div>
+                <img src="<?= BASEURL?>uploads/games/default.jpg"
+                     class="card-img-top"
+                     alt="Default Game Image"
+                     style="height: 200px; object-fit: cover;">
               <?php endif; ?>
               <div class="card-body">
                 <h5 class="card-title"><?= htmlspecialchars($game['judul']); ?></h5>
