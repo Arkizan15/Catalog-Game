@@ -4,13 +4,16 @@
   <title>User Management | Admin Panel</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="<?= BASEURL?>assets/images/favicon.svg" type="image/x-icon">
+  <link rel="icon" href="<?= BASEURL?>assets/img/images_admin/favicon.svg" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/tabler-icons.min.css">
-  <link rel="stylesheet" href="<?= BASEURL?>assets/css/style.css">
-  <link rel="stylesheet" href="<?= BASEURL?>assets/css/style-preset.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/feather.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/fontawesome.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/material.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style-preset.css">
 </head>
-<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
+<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="dark">
 
 <div class="loader-bg">
   <div class="loader-track">
@@ -118,6 +121,12 @@
 <script src="<?= BASEURL?>assets/js/fonts/custom-font.js"></script>
 <script src="<?= BASEURL?>assets/js/pcoded.js"></script>
 <script src="<?= BASEURL?>assets/js/plugins/feather.min.js"></script>
+
+<script>layout_change('dark');</script>
+<script>change_box_container('false');</script>
+<script>layout_rtl_change('false');</script>
+<script>preset_change("preset-1");</script>
+<script>font_change("Public-Sans");</script>
 
 <script>
 function toggleAdmin(userId, username) {

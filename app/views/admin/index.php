@@ -1,408 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- [Head] start -->
-
 <head>
-  <title>Home | Mantis Bootstrap 5 Admin Template</title>
-  <!-- [Meta] -->
+  <title>Manage Games | Admin Panel</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Mantis is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
-  <meta name="keywords" content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
-  <meta name="author" content="CodedThemes">
-
-  <!-- [Favicon] icon -->
-  <link rel="icon" href="<?= BASEURL?>assets/images/favicon.svg" type="image/x-icon"> <!-- [Google Font] Family -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
-<!-- [Tabler Icons] https://tablericons.com -->
-<link rel="stylesheet" href="<?= BASEURL?>assets/fonts/tabler-icons.min.css" >
-<!-- [Feather Icons] https://feathericons.com -->
-<link rel="stylesheet" href="<?= BASEURL?>assets/fonts/feather.css" >
-<!-- [Font Awesome Icons] https://fontawesome.com/icons -->
-<link rel="stylesheet" href="<?= BASEURL?>assets/fonts/fontawesome.css" >
-<!-- [Material Icons] https://fonts.google.com/icons -->
-<link rel="stylesheet" href="<?= BASEURL?>assets/fonts/material.css" >
-<!-- [Template CSS Files] -->
-<link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style.css" id="main-style-link" >
-<link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style-preset.css" >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="<?= BASEURL?>assets/img/images_admin/favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/tabler-icons.min.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/feather.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/fontawesome.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/material.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style.css">
+  <link rel="stylesheet" href="<?= BASEURL?>assets/css/admin_css/style-preset.css">
 </head>
-<!-- [Head] end -->
-<!-- [Body] Start -->
+<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="dark">
 
-<body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
-  <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
   <div class="loader-track">
     <div class="loader-fill"></div>
   </div>
 </div>
-<!-- [ Pre-loader ] End -->
- <!-- [ Sidebar Menu ] start -->
-<nav class="pc-sidebar">
-  <div class="navbar-wrapper">
-    <div class="m-header">
-      <a href="index.html" class="b-brand text-primary">
-        <!-- ========   Change your logo from here   ============ -->
-        <!-- <img src="<?= BASEURL?>assets/images/logo-icon.svg" class="img-fluid logo-lg" alt="logo"> -->
-      </a>
-      <img src="<?= BASEURL?>assets//img/images_admin/logo-icon.svg" class="img-fluid logo-lg" alt="logo">
+
+<?php include '../app/views/admin/sidebar.php'; ?>
+<?php include '../app/views/admin/header.php'; ?>
+
+<div class="pc-container">
+  <div class="pc-content">
+    <div class="page-header">
+      <div class="page-block">
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <div class="page-header-title">
+              <h5 class="m-b-10">Game Management Dashboard</h5>
+            </div>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item"><a href="<?= BASEURL?>admin">Admin</a></li>
+              <li class="breadcrumb-item" aria-current="page">Dashboard</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="navbar-content">
-      <ul class="pc-navbar">
-        <li class="pc-item">
-          <a href="index.html" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
-            <span class="pc-mtext">Dashboard</span>
-          </a>
-        </li>
 
-        <li class="pc-item pc-caption">
-          <label>UI Components</label>
-          <i class="ti ti-dashboard"></i>
-        </li>
-        <li class="pc-item">
-          <!-- <a href=".<?= BASEURL?>elements/bc_typography.html" class="pc-link"> -->
-            <a href="#" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-typography"></i></span>
-            <span class="pc-mtext">Typography</span>
-          </a>
-        </li>
-        <li class="pc-item">
-          <!-- <a href=".<?= BASEURL?>elements/bc_color.html" class="pc-link"> -->
-            <a href="#" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-color-swatch"></i></span>
-            <span class="pc-mtext">Color</span>
-          </a>
-        </li>
-        <li class="pc-item">
-          <!-- <a href=".<?= BASEURL?>elements/icon-tabler.html" class="pc-link"> -->
-            <a href="#" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-plant-2"></i></span>
-            <span class="pc-mtext">Icons</span>
-          </a>
-        </li>
+    <!-- Dashboard Stats -->
+    <?php include '../app/views/admin/dashboard.php'; ?>
 
-      </ul>
+    <!-- Divider -->
+    <div class="row my-4">
+      <div class="col-12">
+        <hr>
+        <h4 class="mb-3">All Games Management</h4>
+      </div>
+    </div>
 
+    <!-- Add Game Button -->
+    <div class="row mb-3">
+      <div class="col-12">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGameModal">
+          <i class="ti ti-plus"></i> Add New Game
+        </button>
+      </div>
+    </div>
+
+    <!-- Games List -->
+    <div class="row">
+      <?php if (isset($data['games']) && !empty($data['games'])): ?>
+        <?php foreach ($data['games'] as $game): ?>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card game-card">
+              <?php if (!empty($game['image_path'])): ?>
+                <img src="<?= BASEURL?>uploads/games/<?= htmlspecialchars($game['image_path']); ?>" 
+                     class="card-img-top" 
+                     alt="<?= htmlspecialchars($game['judul']); ?>"
+                     style="height: 200px; object-fit: cover;">
+              <?php else: ?>
+                <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                  No Image
+                </div>
+              <?php endif; ?>
+              <div class="card-body">
+                <h5 class="card-title"><?= htmlspecialchars($game['judul']); ?></h5>
+                <p class="card-text text-muted small mb-2">
+                  <i class="ti ti-calendar"></i> <?= htmlspecialchars($game['rilis']); ?>
+                </p>
+                <p class="card-text">
+                  <span class="badge bg-primary"><?= htmlspecialchars($game['genre']); ?></span>
+                </p>
+                <p class="card-text text-muted small">
+                  <i class="ti ti-device-gamepad"></i> <?= htmlspecialchars($game['platform']); ?>
+                </p>
+                <p class="card-text text-muted small">
+                  <i class="ti ti-building"></i> <?= htmlspecialchars($game['developer']); ?>
+                </p>
+                <p class="card-text small"><?= substr(htmlspecialchars($game['description']), 0, 100); ?>...</p>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-sm btn-warning" onclick="editGame(<?= $game['id']; ?>)">
+                    <i class="ti ti-edit"></i> Edit
+                  </button>
+                  <button class="btn btn-sm btn-danger" onclick="deleteGame(<?= $game['id']; ?>, '<?= htmlspecialchars($game['judul']); ?>')">
+                    <i class="ti ti-trash"></i> Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <div class="col-12">
+          <div class="alert alert-info">No games found. Add your first game!</div>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
-</nav>
-<!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
-<header class="pc-header">
-  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
-<div class="me-auto pc-mob-drp">
-  <ul class="list-unstyled">
-    <!-- ======= Menu collapse Icon ===== -->
-    <li class="pc-h-item pc-sidebar-collapse">
-      <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
-        <i class="ti ti-menu-2"></i>
-      </a>
-    </li>
-    <li class="pc-h-item pc-sidebar-popup">
-      <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
-        <i class="ti ti-menu-2"></i>
-      </a>
-    </li>
-    <li class="dropdown pc-h-item d-inline-flex d-md-none">
-      <a
-        class="pc-head-link dropdown-toggle arrow-none m-0"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="false"
-        aria-expanded="false"
-      >
-        <i class="ti ti-search"></i>
-      </a>
-      <div class="dropdown-menu pc-h-dropdown drp-search">
-        <form class="px-3">
-          <div class="form-group mb-0 d-flex align-items-center">
-            <i data-feather="search"></i>
-            <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-          </div>
-        </form>
+</div>
+
+<!-- Modal Add Game -->
+<div class="modal fade" id="addGameModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Game</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-    </li>
-    <li class="pc-h-item d-none d-md-inline-flex">
-      <form class="header-search">
-        <i data-feather="search" class="icon-search"></i>
-        <input type="search" class="form-control" placeholder="Search here. . .">
+      <form id="addGameForm" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Game Title <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="judul" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Release Date <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="rilis" placeholder="19 Januari 2023" required>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Genre <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="genre" placeholder="Action, RPG, Strategy" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Platform <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="platform" placeholder="PC, PS5, Xbox" required>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Developer <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="developer" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea class="form-control" name="description" rows="4" required></textarea>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Game Image <span class="text-danger">*</span></label>
+            <input type="file" class="form-control" name="game_image" accept="image/*" required>
+            <small class="text-muted">Max 5MB. Allowed: JPG, PNG, WEBP</small>
+          </div>
+          
+          <div id="imagePreview" class="mb-3" style="display: none;">
+            <img src="" alt="Preview" style="max-width: 100%; height: auto; border-radius: 8px;">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="ti ti-device-floppy"></i> Save Game
+          </button>
+        </div>
       </form>
-    </li>
-  </ul>
-</div>
-<!-- [Mobile Media Block end] -->
-<div class="ms-auto">
-  <ul class="list-unstyled">
-    <li class="dropdown pc-h-item">
-      <a
-        class="pc-head-link dropdown-toggle arrow-none me-0"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="false"
-        aria-expanded="false"
-      >
-        <i class="ti ti-mail"></i>
-      </a>
-      <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
-        <div class="dropdown-header d-flex align-items-center justify-content-between">
-          <h5 class="m-0">Message</h5>
-          <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-x text-danger"></i></a>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="dropdown-header px-0 text-wrap header-notification-scroll position-relative" style="max-height: calc(100vh - 215px)">
-          <div class="list-group list-group-flush w-100">
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src=".<?= BASEURL?>assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">3:00 AM</span>
-                  <p class="text-body mb-1">It's <b>Cristina danny's</b> birthday today.</p>
-                  <span class="text-muted">2 min ago</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src=".<?= BASEURL?>assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">6:00 PM</span>
-                  <p class="text-body mb-1"><b>Aida Burg</b> commented your post.</p>
-                  <span class="text-muted">5 August</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src=".<?= BASEURL?>assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">2:45 PM</span>
-                  <p class="text-body mb-1"><b>There was a failure to your setup.</b></p>
-                  <span class="text-muted">7 hours ago</span>
-                </div>
-              </div>
-            </a>
-            <a class="list-group-item list-group-item-action">
-              <div class="d-flex">
-                <div class="flex-shrink-0">
-                  <img src=".<?= BASEURL?>assets/images/user/avatar-4.jpg" alt="user-image" class="user-avtar">
-                </div>
-                <div class="flex-grow-1 ms-1">
-                  <span class="float-end text-muted">9:10 PM</span>
-                  <p class="text-body mb-1"><b>Cristina Danny </b> invited to join <b> Meeting.</b></p>
-                  <span class="text-muted">Daily scrum meeting time</span>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="text-center py-2">
-          <a href="#!" class="link-primary">View all</a>
-        </div>
-      </div>
-    </li>
-    <li class="dropdown pc-h-item header-user-profile">
-      <a
-        class="pc-head-link dropdown-toggle arrow-none me-0"
-        data-bs-toggle="dropdown"
-        href="#"
-        role="button"
-        aria-haspopup="false"
-        data-bs-auto-close="outside"
-        aria-expanded="false"
-      >
-       
-      </a>
-      <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
-        <div class="dropdown-header">
-          <div class="d-flex mb-1">
-            <div class="flex-shrink-0">
-              <img src=".<?= BASEURL?>assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
-            </div>
-            <div class="flex-grow-1 ms-3">
-              <h6 class="mb-1">Stebin Ben</h6>
-              <span>UI/UX Designer</span>
-            </div>
-            <a href="#!" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
-          </div>
-        </div>
-        <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link active"
-              id="drp-t1"
-              data-bs-toggle="tab"
-              data-bs-target="#drp-tab-1"
-              type="button"
-              role="tab"
-              aria-controls="drp-tab-1"
-              aria-selected="true"
-              ><i class="ti ti-user"></i> Profile</button
-            >
-          </li>
-          <li class="nav-item" role="presentation">
-            <button
-              class="nav-link"
-              id="drp-t2"
-              data-bs-toggle="tab"
-              data-bs-target="#drp-tab-2"
-              type="button"
-              role="tab"
-              aria-controls="drp-tab-2"
-              aria-selected="false"
-              ><i class="ti ti-settings"></i> Setting</button
-            >
-          </li>
-        </ul>
-        <div class="tab-content" id="mysrpTabContent">
-          <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel" aria-labelledby="drp-t1" tabindex="0">
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-edit-circle"></i>
-              <span>Edit Profile</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-user"></i>
-              <span>View Profile</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-clipboard-list"></i>
-              <span>Social Profile</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-wallet"></i>
-              <span>Billing</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-power"></i>
-              <span>Logout</span>
-            </a>
-          </div>
-          <div class="tab-pane fade" id="drp-tab-2" role="tabpanel" aria-labelledby="drp-t2" tabindex="0">
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-help"></i>
-              <span>Support</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-user"></i>
-              <span>Account Settings</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-lock"></i>
-              <span>Privacy Center</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-messages"></i>
-              <span>Feedback</span>
-            </a>
-            <a href="#!" class="dropdown-item">
-              <i class="ti ti-list"></i>
-              <span>History</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
- </div>
-</header>
-<!-- [ Header ] end -->
-
-
-
-  <!-- [ Main Content ] start -->
-  <div class="pc-container">
-    <div class="pc-content">
-      <!-- [ breadcrumb ] start >
-      <div class="page-header">
-        <div class="page-block">
-          <div class="row align-items-center">
-            <div class="col-md-12">
-              <div class="page-header-title">
-                <h5 class="m-b-10">Home</h5>
-              </div>
-              <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href=".<?= BASEURL?>dashboard/index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript: void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item" aria-current="page">Home</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-       [ breadcrumb ] end -->
-      <!-- [ Main Content ] start -->
-      
-        <?php 
-            include "dashboard.php"
-        ?>
-
     </div>
   </div>
-  <!-- [ Main Content ] end -->
-  <footer class="pc-footer">
-    <div class="footer-wrapper container-fluid">
-      <div class="row">
-        <div class="col-sm my-1">
-          <p class="m-0"
-            >Mantis &#9829; crafted by Team <a href="https://themeforest.net/user/codedthemes" target="_blank">Codedthemes</a> Distributed by <a href="https://themewagon.com/">ThemeWagon</a>.</p
-          >
+</div>
+
+<!-- Modal Edit Game -->
+<div class="modal fade" id="editGameModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Game</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="editGameForm" enctype="multipart/form-data">
+        <input type="hidden" name="id" id="edit_id">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Game Title <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="judul" id="edit_judul" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Release Date <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="rilis" id="edit_rilis" required>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Genre <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="genre" id="edit_genre" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Platform <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="platform" id="edit_platform" required>
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Developer <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="developer" id="edit_developer" required>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea class="form-control" name="description" id="edit_description" rows="4" required></textarea>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label">Game Image (Optional - leave empty to keep current)</label>
+            <input type="file" class="form-control" name="game_image" accept="image/*">
+            <small class="text-muted">Max 5MB. Allowed: JPG, PNG, WEBP</small>
+          </div>
+          
+          <div id="editImagePreview" class="mb-3">
+            <img src="" alt="Current Image" id="current_image" style="max-width: 100%; height: auto; border-radius: 8px;">
+          </div>
         </div>
-        <div class="col-auto my-1">
-          <ul class="list-inline footer-link mb-0">
-            <li class="list-inline-item"><a href=".<?= BASEURL?>index.html">Home</a></li>
-          </ul>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-warning">
+            <i class="ti ti-device-floppy"></i> Update Game
+          </button>
         </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="pc-footer">
+  <div class="footer-wrapper container-fluid">
+    <div class="row">
+      <div class="col-sm my-1">
+        <p class="m-0">Admin Panel - Kiki's Catalog Game</p>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <!-- [Page Specific JS] start -->
-  <script src="<?= BASEURL?>assets/js/plugins/apexcharts.min.js"></script>
-  <script src="<?= BASEURL?>assets/js/pages/dashboard-default.js"></script>
-  <!-- [Page Specific JS] end -->
-  <!-- Required Js -->
-  <script src="<?= BASEURL?>assets/js/plugins/popper.min.js"></script>
-  <script src="<?= BASEURL?>assets/js/plugins/simplebar.min.js"></script>
-  <script src="<?= BASEURL?>assets/js/plugins/bootstrap.min.js"></script>
-  <script src="<?= BASEURL?>assets/js/fonts/custom-font.js"></script>
-  <script src="<?= BASEURL?>assets/js/pcoded.js"></script>
-  <script src="<?= BASEURL?>assets/js/plugins/feather.min.js"></script>
+<script src="<?= BASEURL?>assets/js/plugins/popper.min.js"></script>
+<script src="<?= BASEURL?>assets/js/plugins/simplebar.min.js"></script>
+<script src="<?= BASEURL?>assets/js/plugins/bootstrap.min.js"></script>
+<script src="<?= BASEURL?>assets/js/fonts/custom-font.js"></script>
+<script src="<?= BASEURL?>assets/js/pcoded.js"></script>
+<script src="<?= BASEURL?>assets/js/plugins/feather.min.js"></script>
 
+<script>layout_change('dark');</script>
+<script>change_box_container('false');</script>
+<script>layout_rtl_change('false');</script>
+<script>preset_change("preset-1");</script>
+<script>font_change("Public-Sans");</script>
+
+<script>
+// Preview image saat dipilih (Add Form)
+document.querySelector('#addGameForm input[name="game_image"]').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.querySelector('#imagePreview img').src = e.target.result;
+      document.getElementById('imagePreview').style.display = 'block';
+    }
+    reader.readAsDataURL(file);
+  }
+});
+
+// Submit Add Game Form
+document.getElementById('addGameForm').addEventListener('submit', function(e) {
+  e.preventDefault();
   
+  const formData = new FormData(this);
+  const submitBtn = this.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
   
+  fetch('<?= BASEURL?>admin/addGame', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert('Game added successfully!');
+      location.reload();
+    } else {
+      alert('Error: ' + data.message);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Save Game';
+    }
+  })
+  .catch(error => {
+    alert('Error: ' + error);
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Save Game';
+  });
+});
+
+// Edit Game
+function editGame(id) {
+  fetch(`<?= BASEURL?>admin/getGame?id=${id}`)
+    .then(res => res.json())
+    .then(game => {
+      document.getElementById('edit_id').value = game.id;
+      document.getElementById('edit_judul').value = game.judul;
+      document.getElementById('edit_rilis').value = game.rilis;
+      document.getElementById('edit_genre').value = game.genre;
+      document.getElementById('edit_platform').value = game.platform;
+      document.getElementById('edit_developer').value = game.developer;
+      document.getElementById('edit_description').value = game.description;
+      
+      if (game.image_path) {
+        document.getElementById('current_image').src = '<?= BASEURL?>uploads/games/' + game.image_path;
+        document.getElementById('editImagePreview').style.display = 'block';
+      }
+      
+      const modal = new bootstrap.Modal(document.getElementById('editGameModal'));
+      modal.show();
+    });
+}
+
+// Submit Edit Game Form
+document.getElementById('editGameForm').addEventListener('submit', function(e) {
+  e.preventDefault();
   
+  const formData = new FormData(this);
+  const submitBtn = this.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
   
-  <script>layout_change('light');</script>
-  
-  
-  
-  
-  <script>change_box_container('false');</script>
-  
-  
-  
-  <script>layout_rtl_change('false');</script>
-  
-  
-  <script>preset_change("preset-1");</script>
-  
-  
-  <script>font_change("Public-Sans");</script>
-  
-    
+  fetch('<?= BASEURL?>admin/editGame', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert('Game updated successfully!');
+      location.reload();
+    } else {
+      alert('Error: ' + data.message);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Update Game';
+    }
+  })
+  .catch(error => {
+    alert('Error: ' + error);
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Update Game';
+  });
+});
+
+// Delete Game
+function deleteGame(id, title) {
+  if (confirm(`Delete game "${title}"? This action cannot be undone!`)) {
+    fetch('<?= BASEURL?>admin/deleteGame', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: `id=${id}`
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert('Game deleted successfully!');
+        location.reload();
+      } else {
+        alert('Error: ' + data.message);
+      }
+    });
+  }
+}
+</script>
 
 </body>
-<!-- [Body] end -->
-
 </html>
