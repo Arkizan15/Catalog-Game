@@ -43,8 +43,7 @@
     </div>
 
     <!-- Dashboard Stats -->
-    <?php include '../app/views/admin/dashboard.php'; ?>
-
+    
     <!-- Divider -->
     <div class="row my-4">
       <div class="col-12">

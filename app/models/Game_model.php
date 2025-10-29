@@ -10,8 +10,27 @@ class Game_model {
 
     // Ambil semua game
     public function getAllGames() {
-        $this->db->query("SELECT * FROM {$this->table} ORDER BY id ASC");
+        $this->db->query("SELECT * FROM {$this->table} ORDER BY id DESC");
         return $this->db->resultSet();
+    }
+
+    // Get total games count
+    public function getTotalGames() {
+        $this->db->query("SELECT COUNT(*) as total FROM {$this->table}");
+        $result = $this->db->single();
+        return $result['total'] ?? 0;
+    }
+
+    // Get games added this month (fallback to count all if created_at doesn't exist)
+    public function getGamesThisMonth() {
+        try {
+            $this->db->query("SELECT COUNT(*) as total FROM {$this->table} WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE())");
+            $result = $this->db->single();
+            return $result['total'] ?? 0;
+        } catch (Exception $e) {
+            // If created_at column doesn't exist, return 0
+            return 0;
+        }
     }
 
     // Ambil game berdasarkan ID
@@ -29,30 +48,44 @@ class Game_model {
         return $this->db->single();
     }
 
-    // Tambah game baru
+    // Tambah game baru (dengan upload image)
     public function addGame($data) {
-        $this->db->query("
-            INSERT INTO {$this->table} (judul, rilis, genre, platform, description, developer) 
-            VALUES (:judul, :rilis, :genre, :platform, :description, :developer)
-        ");
+        $query = "INSERT INTO {$this->table} 
+                  (judul, rilis, genre, platform, description, developer, image_path) 
+                  VALUES 
+                  (:judul, :rilis, :genre, :platform, :description, :developer, :image_path)";
+        
+        $this->db->query($query);
         $this->db->bind(':judul', $data['judul']);
         $this->db->bind(':rilis', $data['rilis']);
         $this->db->bind(':genre', $data['genre']);
         $this->db->bind(':platform', $data['platform']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':developer', $data['developer']);
+        $this->db->bind(':image_path', $data['image_path'] ?? '');
+        
         $this->db->execute();
-        return $this->db->rowCount();
+        return $this->db->rowCount() > 0;
     }
 
     // Update data game
     public function updateGame($data) {
-        $this->db->query("
-            UPDATE {$this->table}
-            SET judul = :judul, rilis = :rilis, genre = :genre, platform = :platform,
-                description = :description, developer = :developer
-            WHERE id = :id
-        ");
+        $query = "UPDATE {$this->table}
+                  SET judul = :judul, 
+                      rilis = :rilis, 
+                      genre = :genre, 
+                      platform = :platform,
+                      description = :description, 
+                      developer = :developer";
+        
+        // Jika ada image baru, update juga
+        if (!empty($data['image_path'])) {
+            $query .= ", image_path = :image_path";
+        }
+        
+        $query .= " WHERE id = :id";
+        
+        $this->db->query($query);
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':judul', $data['judul']);
         $this->db->bind(':rilis', $data['rilis']);
@@ -60,16 +93,41 @@ class Game_model {
         $this->db->bind(':platform', $data['platform']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':developer', $data['developer']);
+        
+        if (!empty($data['image_path'])) {
+            $this->db->bind(':image_path', $data['image_path']);
+        }
+        
         $this->db->execute();
-        return $this->db->rowCount();
+        return $this->db->rowCount() > 0;
     }
 
     // Hapus game
     public function deleteGame($id) {
+        // Get image path first untuk delete file
+        $game = $this->getGameById($id);
+        
         $this->db->query("DELETE FROM {$this->table} WHERE id = :id");
         $this->db->bind(':id', $id);
         $this->db->execute();
-        return $this->db->rowCount();
+        
+        return [
+            'success' => $this->db->rowCount() > 0,
+            'image_path' => $game['image_path'] ?? null
+        ];
+    }
+
+    // Search games
+    public function searchGames($keyword) {
+        $query = "SELECT * FROM {$this->table} 
+                  WHERE judul LIKE :keyword 
+                  OR genre LIKE :keyword 
+                  OR developer LIKE :keyword 
+                  ORDER BY id DESC";
+        
+        $this->db->query($query);
+        $this->db->bind(':keyword', "%{$keyword}%");
+        return $this->db->resultSet();
     }
 
     // ========== SLUG CONVERTER ==========
@@ -98,7 +156,7 @@ class Game_model {
     private function slugToTitle($slug) {
         $mapping = [
             'astfu' => 'A Space For The Unbound',
-            'fe3' => 'Fire Emblem',
+            'fe3' => 'Ultraman Fighting Evolution 3',
             'persona3' => 'Persona 3 Reload',
             'persona5' => 'Persona 5',
             'stardew' => 'Stardew Valley',
