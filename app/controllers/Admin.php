@@ -16,16 +16,16 @@ class Admin extends Controller {
         }
     }
     
-    // Dashboard admin (untuk menambah game)
+    // Dashboard admin
     public function index() {
         $data['title'] = 'Admin Dashboard - Manage Games';
         $data['username'] = $_SESSION['username'];
 
-        // Load model game
-        $gameModel = $this->model('Game_model');
-        $data['games'] = $gameModel->getAllGames();
-        $data['total_games'] = $gameModel->getTotalGames();
-        $data['games_this_month'] = $gameModel->getGamesThisMonth();
+        // Load admin model
+        $adminModel = $this->model('Admin_model');
+        $data['games'] = $adminModel->getAllGames();
+        $data['total_games'] = $adminModel->getTotalGames();
+        $data['games_this_month'] = $adminModel->getGamesThisMonth();
 
         $this->view('admin/index', $data);
     }
@@ -42,100 +42,151 @@ class Admin extends Controller {
         $this->view('admin/user', $data);
     }
     
-    // Add game dengan upload image
+    // ✅ ADD GAME dengan upload image
     public function addGame() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $uploadResult = $this->handleImageUpload($_FILES['game_image'] ?? null);
+        header('Content-Type: application/json');
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+            exit;
+        }
+
+        try {
+            // Validasi input
+            $required = ['judul', 'rilis', 'genre', 'platform', 'description', 'developer'];
+            foreach ($required as $field) {
+                if (empty($_POST[$field])) {
+                    echo json_encode(['success' => false, 'message' => "Field {$field} is required"]);
+                    exit;
+                }
+            }
+
+            // Validasi file upload
+            if (!isset($_FILES['game_image']) || $_FILES['game_image']['error'] !== UPLOAD_ERR_OK) {
+                echo json_encode(['success' => false, 'message' => 'Game image is required']);
+                exit;
+            }
+
+            // Handle image upload
+            $uploadResult = $this->handleImageUpload($_FILES['game_image']);
             
             if (!$uploadResult['success']) {
-                header('Content-Type: application/json');
-                echo json_encode([
-                    'success' => false, 
-                    'message' => $uploadResult['message']
-                ]);
+                echo json_encode(['success' => false, 'message' => $uploadResult['message']]);
                 exit;
             }
             
+            // Prepare data
             $gameData = [
-                'judul' => $_POST['judul'] ?? '',
-                'rilis' => $_POST['rilis'] ?? '',
-                'genre' => $_POST['genre'] ?? '',
-                'platform' => $_POST['platform'] ?? '',
-                'description' => $_POST['description'] ?? '',
-                'developer' => $_POST['developer'] ?? '',
+                'judul' => trim($_POST['judul']),
+                'rilis' => trim($_POST['rilis']),
+                'genre' => trim($_POST['genre']),
+                'platform' => trim($_POST['platform']),
+                'description' => trim($_POST['description']),
+                'developer' => trim($_POST['developer']),
                 'image_path' => $uploadResult['image_path']
             ];
             
-            $gameModel = $this->model('Game_model');
-            $result = $gameModel->addGame($gameData);
+            // Insert to database
+            $adminModel = $this->model('Admin_model');
+            $result = $adminModel->addGame($gameData);
             
-            header('Content-Type: application/json');
-            echo json_encode([
-                'success' => $result,
-                'message' => $result ? 'Game added successfully!' : 'Failed to add game'
-            ]);
-            exit;
+            if ($result) {
+                echo json_encode(['success' => true, 'message' => 'Game added successfully!']);
+            } else {
+                // Rollback: hapus file jika insert gagal
+                if (file_exists('../public/uploads/games/' . $uploadResult['image_path'])) {
+                    unlink('../public/uploads/games/' . $uploadResult['image_path']);
+                }
+                echo json_encode(['success' => false, 'message' => 'Failed to save game to database']);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
+        exit;
     }
     
-    // Edit game
+    // ✅ EDIT GAME
     public function editGame() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        header('Content-Type: application/json');
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+            exit;
+        }
+
+        try {
+            // Validasi input
+            if (empty($_POST['id'])) {
+                echo json_encode(['success' => false, 'message' => 'Game ID is required']);
+                exit;
+            }
+
             $gameData = [
-                'id' => $_POST['id'] ?? null,
-                'judul' => $_POST['judul'] ?? '',
-                'rilis' => $_POST['rilis'] ?? '',
-                'genre' => $_POST['genre'] ?? '',
-                'platform' => $_POST['platform'] ?? '',
-                'description' => $_POST['description'] ?? '',
-                'developer' => $_POST['developer'] ?? '',
+                'id' => $_POST['id'],
+                'judul' => trim($_POST['judul']),
+                'rilis' => trim($_POST['rilis']),
+                'genre' => trim($_POST['genre']),
+                'platform' => trim($_POST['platform']),
+                'description' => trim($_POST['description']),
+                'developer' => trim($_POST['developer']),
                 'image_path' => ''
             ];
             
             // Jika ada upload image baru
-            if (isset($_FILES['game_image']) && $_FILES['game_image']['error'] == 0) {
-                // Hapus image lama
-                $gameModel = $this->model('Game_model');
-                $oldGame = $gameModel->getGameById($gameData['id']);
-                if (!empty($oldGame['image_path'])) {
-                    $oldImagePath = '../public/uploads/games/' . $oldGame['image_path'];
-                    if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath);
-                    }
-                }
-                
+            if (isset($_FILES['game_image']) && $_FILES['game_image']['error'] === UPLOAD_ERR_OK) {
+                $adminModel = $this->model('Admin_model');
+                $oldGame = $adminModel->getGameById($gameData['id']);
+
                 // Upload image baru
                 $uploadResult = $this->handleImageUpload($_FILES['game_image']);
+
                 if ($uploadResult['success']) {
                     $gameData['image_path'] = $uploadResult['image_path'];
+
+                    // Hapus image lama jika ada
+                    if (!empty($oldGame['image_path'])) {
+                        $oldImagePath = '../public/uploads/games/' . $oldGame['image_path'];
+                        if (file_exists($oldImagePath)) {
+                            unlink($oldImagePath);
+                        }
+                    }
                 }
             }
+
+            // Update database
+            $adminModel = $this->model('Admin_model');
+            $result = $adminModel->updateGame($gameData);
             
-            $gameModel = $this->model('Game_model');
-            $result = $gameModel->updateGame($gameData);
-            
-            header('Content-Type: application/json');
-            echo json_encode([
-                'success' => $result,
-                'message' => $result ? 'Game updated successfully!' : 'Failed to update game'
-            ]);
-            exit;
+            if ($result) {
+                echo json_encode(['success' => true, 'message' => 'Game updated successfully!']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to update game']);
+            }
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
+        exit;
     }
     
-    // Delete game
+    // ✅ DELETE GAME
     public function deleteGame() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        header('Content-Type: application/json');
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+            exit;
+        }
+
+        try {
             $id = $_POST['id'] ?? null;
             
             if (!$id) {
-                header('Content-Type: application/json');
-                echo json_encode(['success' => false, 'message' => 'Invalid game ID']);
+                echo json_encode(['success' => false, 'message' => 'Game ID is required']);
                 exit;
             }
             
-            $gameModel = $this->model('Game_model');
-            $result = $gameModel->deleteGame($id);
+            $adminModel = $this->model('Admin_model');
+            $result = $adminModel->deleteGame($id);
             
             // Hapus file image jika ada
             if ($result['success'] && !empty($result['image_path'])) {
@@ -145,24 +196,30 @@ class Admin extends Controller {
                 }
             }
             
-            header('Content-Type: application/json');
             echo json_encode([
                 'success' => $result['success'],
                 'message' => $result['success'] ? 'Game deleted successfully!' : 'Failed to delete game'
             ]);
-            exit;
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
+        exit;
     }
     
-    // Handle image upload
+    // ✅ HANDLE IMAGE UPLOAD
     private function handleImageUpload($file) {
-        if (!$file || $file['error'] !== 0) {
-            return ['success' => false, 'message' => 'No file uploaded or upload error'];
+        // Validasi file upload
+        if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
+            return ['success' => false, 'message' => 'File upload error'];
         }
         
         // Validasi tipe file
         $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-        if (!in_array($file['type'], $allowedTypes)) {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+        
+        if (!in_array($mimeType, $allowedTypes)) {
             return ['success' => false, 'message' => 'Invalid file type. Only JPG, PNG, and WEBP allowed'];
         }
         
@@ -173,16 +230,26 @@ class Admin extends Controller {
         
         // Generate unique filename
         $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-        $filename = uniqid('game_') . '_' . time() . '.' . $extension;
+        $filename = 'game_' . uniqid() . '_' . time() . '.' . strtolower($extension);
         
         // Upload directory
         $uploadDir = '../public/uploads/games/';
+        
+        // Create directory jika belum ada
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+            if (!mkdir($uploadDir, 0755, true)) {
+                return ['success' => false, 'message' => 'Failed to create upload directory'];
+            }
+        }
+        
+        // Check write permission
+        if (!is_writable($uploadDir)) {
+            return ['success' => false, 'message' => 'Upload directory is not writable'];
         }
         
         $destination = $uploadDir . $filename;
         
+        // Move uploaded file
         if (move_uploaded_file($file['tmp_name'], $destination)) {
             return [
                 'success' => true,
@@ -193,23 +260,61 @@ class Admin extends Controller {
         return ['success' => false, 'message' => 'Failed to move uploaded file'];
     }
     
-    // Get game data for editing (AJAX)
-    public function getGame() {
-        if (isset($_GET['id'])) {
-            $gameModel = $this->model('Game_model');
-            $game = $gameModel->getGameById($_GET['id']);
-            
-            header('Content-Type: application/json');
-            echo json_encode($game);
+    
+public function getGame() {
+    header('Content-Type: application/json');
+    
+    // Log untuk debugging
+    error_log('getGame called with GET params: ' . print_r($_GET, true));
+    
+    if (!isset($_GET['id']) || empty($_GET['id'])) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Game ID is required', 'received' => $_GET]);
+        exit;
+    }
+    
+    try {
+        $id = intval($_GET['id']);
+        
+        if ($id <= 0) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Invalid Game ID']);
             exit;
         }
+        
+        $adminModel = $this->model('Admin_model');
+        $game = $adminModel->getGameById($id);
+        
+        if ($game) {
+            echo json_encode($game);
+        } else {
+            http_response_code(404);
+            echo json_encode(['error' => 'Game not found', 'id' => $id]);
+        }
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
     }
+    exit;
+}
     
     // Manage user
     public function manageUser() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        header('Content-Type: application/json');
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+            exit;
+        }
+
+        try {
             $action = $_POST['action'] ?? null;
             $userId = $_POST['user_id'] ?? null;
+            
+            if (!$action || !$userId) {
+                echo json_encode(['success' => false, 'message' => 'Missing required parameters']);
+                exit;
+            }
             
             $userModel = $this->model('User_model');
             
@@ -224,12 +329,13 @@ class Admin extends Controller {
                     $result = false;
             }
             
-            header('Content-Type: application/json');
             echo json_encode([
                 'success' => $result,
                 'message' => $result ? 'Action completed successfully' : 'Action failed'
             ]);
-            exit;
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
         }
+        exit;
     }
 }

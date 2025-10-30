@@ -4,7 +4,7 @@
   <title>Manage Games | Admin Panel</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="<?= BASEURL?>assets/img/images_admin/favicon.svg" type="image/x-icon">
+  <link rel="icon" href="<?= BASEURL?>assets/img/images_admin/logo-icon.svg" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/tabler-icons.min.css">
   <link rel="stylesheet" href="<?= BASEURL?>assets/fonts/feather.css">
@@ -44,7 +44,6 @@
 
     <!-- Dashboard Stats -->
     
-    
     <!-- Divider -->
     <div class="row my-4">
       <div class="col-12">
@@ -72,9 +71,10 @@
                 <img src="<?= BASEURL?>uploads/games/<?= htmlspecialchars($game['image_path']); ?>"
                      class="card-img-top"
                      alt="<?= htmlspecialchars($game['judul']); ?>"
-                     style="height: 200px; object-fit: cover;">
+                     style="height: 200px; object-fit: cover;"
+                     onerror="this.onerror=null; this.src='<?= BASEURL?>assets/img/default.jpg';">
               <?php else: ?>
-                <img src="<?= BASEURL?>uploads/games/default.jpg"
+                <img src="<?= BASEURL?>assets/img/default.jpg"
                      class="card-img-top"
                      alt="Default Game Image"
                      style="height: 200px; object-fit: cover;">
@@ -98,7 +98,7 @@
                   <button class="btn btn-sm btn-warning" onclick="editGame(<?= $game['id']; ?>)">
                     <i class="ti ti-edit"></i> Edit
                   </button>
-                  <button class="btn btn-sm btn-danger" onclick="deleteGame(<?= $game['id']; ?>, '<?= htmlspecialchars($game['judul']); ?>')">
+                  <button class="btn btn-sm btn-danger" onclick="deleteGame(<?= $game['id']; ?>, '<?= htmlspecialchars(addslashes($game['judul'])); ?>')">
                     <i class="ti ti-trash"></i> Delete
                   </button>
                 </div>
@@ -132,7 +132,7 @@
             </div>
             <div class="col-md-6 mb-3">
               <label class="form-label">Release Date <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" name="rilis" placeholder="19 Januari 2023" required>
+              <input type="text" class="form-control" name="rilis" placeholder="29 Oktober 2025" required>
             </div>
           </div>
           
@@ -164,7 +164,8 @@
           </div>
           
           <div id="imagePreview" class="mb-3" style="display: none;">
-            <img src="" alt="Preview" style="max-width: 100%; height: auto; border-radius: 8px;">
+            <label class="form-label">Preview:</label>
+            <img src="" alt="Preview" style="max-width: 100%; height: auto; border-radius: 8px; border: 2px solid #444;">
           </div>
         </div>
         <div class="modal-footer">
@@ -228,7 +229,8 @@
           </div>
           
           <div id="editImagePreview" class="mb-3">
-            <img src="" alt="Current Image" id="current_image" style="max-width: 100%; height: auto; border-radius: 8px;">
+            <label class="form-label">Current Image:</label>
+            <img src="" alt="Current Image" id="current_image" style="max-width: 100%; height: auto; border-radius: 8px; border: 2px solid #444;">
           </div>
         </div>
         <div class="modal-footer">
@@ -252,138 +254,75 @@
   </div>
 </footer>
 
-<script src="<?= BASEURL?>assets/js/plugins/popper.min.js"></script>
-<script src="<?= BASEURL?>assets/js/plugins/simplebar.min.js"></script>
-<script src="<?= BASEURL?>assets/js/plugins/bootstrap.min.js"></script>
-<script src="<?= BASEURL?>assets/js/fonts/custom-font.js"></script>
-<script src="<?= BASEURL?>assets/js/pcoded.js"></script>
-<script src="<?= BASEURL?>assets/js/plugins/feather.min.js"></script>
+<!-- ✅ Scripts -->
+<script src="<?= BASEURL?>assets/js/js_admin/plugins/popper.min.js"></script>
+<script src="<?= BASEURL?>assets/js/js_admin/plugins/bootstrap.min.js"></script>
+<script src="<?= BASEURL?>assets/js/js_admin/plugins/simplebar.min.js"></script>
+<script src="<?= BASEURL?>assets/js/js_admin/fonts/custom-font.js"></script>
+<script src="<?= BASEURL?>assets/js/js_admin/pcoded.js"></script>
+<script src="<?= BASEURL?>assets/js/js_admin/plugins/feather.min.js"></script>
 
-<script>layout_change('dark');</script>
-<script>change_box_container('false');</script>
-<script>layout_rtl_change('false');</script>
-<script>preset_change("preset-1");</script>
-<script>font_change("Public-Sans");</script>
+<!-- ✅ Define BASEURL for JavaScript -->
+<script>
+    window.BASEURL = '<?= BASEURL ?>';
+</script>
+
+<!-- ✅ Load Admin JavaScript -->
+<script src="<?= BASEURL?>assets/js/admin.js"></script>
 
 <script>
-// Preview image saat dipilih (Add Form)
-document.querySelector('#addGameForm input[name="game_image"]').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.querySelector('#imagePreview img').src = e.target.result;
-      document.getElementById('imagePreview').style.display = 'block';
-    }
-    reader.readAsDataURL(file);
-  }
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize admin panel functions after DOM is loaded and pcoded.js is ready
+    setTimeout(function() {
+        try {
+            if (typeof layout_change === 'function') layout_change('dark');
+            if (typeof change_box_container === 'function') change_box_container('false');
+            if (typeof layout_rtl_change === 'function') layout_rtl_change('false');
+            if (typeof preset_change === 'function') preset_change("preset-1");
+            // Skip font_change to avoid null reference errors
+            // if (typeof font_change === 'function') font_change("Public-Sans");
+        } catch (e) {
+            console.warn('Admin panel initialization warning:', e.message);
+        }
+    }, 200);
 });
 
-// Submit Add Game Form
-document.getElementById('addGameForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(this);
-  const submitBtn = this.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
-  
-  fetch('<?= BASEURL?>admin/addGame', {
-    method: 'POST',
-    body: formData
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert('Game added successfully!');
-      location.reload();
-    } else {
-      alert('Error: ' + data.message);
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Save Game';
-    }
-  })
-  .catch(error => {
-    alert('Error: ' + error);
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Save Game';
-  });
+// Override pcoded.js logo paths to use correct paths
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        try {
+            // Override logo paths in pcoded.js
+            const logoElements = document.querySelectorAll('.logo-lg, .logo-icon');
+            logoElements.forEach(function(el) {
+                if (el.src && el.src.includes('logo-white.svg')) {
+                    el.src = '<?= BASEURL?>assets/img/images_admin/logo-white.svg';
+                }
+            });
+        } catch (e) {
+            console.warn('Logo override warning:', e.message);
+        }
+    }, 500);
 });
 
-// Edit Game
-function editGame(id) {
-  fetch(`<?= BASEURL?>admin/getGame?id=${id}`)
-    .then(res => res.json())
-    .then(game => {
-      document.getElementById('edit_id').value = game.id;
-      document.getElementById('edit_judul').value = game.judul;
-      document.getElementById('edit_rilis').value = game.rilis;
-      document.getElementById('edit_genre').value = game.genre;
-      document.getElementById('edit_platform').value = game.platform;
-      document.getElementById('edit_developer').value = game.developer;
-      document.getElementById('edit_description').value = game.description;
-      
-      if (game.image_path) {
-        document.getElementById('current_image').src = '<?= BASEURL?>uploads/games/' + game.image_path;
-        document.getElementById('editImagePreview').style.display = 'block';
-      }
-      
-      const modal = new bootstrap.Modal(document.getElementById('editGameModal'));
-      modal.show();
-    });
-}
-
-// Submit Edit Game Form
-document.getElementById('editGameForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(this);
-  const submitBtn = this.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
-  
-  fetch('<?= BASEURL?>admin/editGame', {
-    method: 'POST',
-    body: formData
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert('Game updated successfully!');
-      location.reload();
-    } else {
-      alert('Error: ' + data.message);
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Update Game';
-    }
-  })
-  .catch(error => {
-    alert('Error: ' + error);
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="ti ti-device-floppy"></i> Update Game';
-  });
+// Fix null reference error in pcoded.js
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        try {
+            // Ensure elements exist before calling setAttribute
+            const elements = document.querySelectorAll('.pc-sidebar .m-header .logo-lg, .navbar-brand .logo-lg, .auth-main.v1 .auth-sidefooter img, .footer-top .footer-logo');
+            elements.forEach(function(el) {
+                if (el && el.setAttribute) {
+                    el.setAttribute('src', '<?= BASEURL?>assets/img/images_admin/logo-white.svg');
+                }
+            });
+        } catch (e) {
+            console.warn('Logo fix warning:', e.message);
+        }
+    }, 300);
 });
-
-// Delete Game
-function deleteGame(id, title) {
-  if (confirm(`Delete game "${title}"? This action cannot be undone!`)) {
-    fetch('<?= BASEURL?>admin/deleteGame', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: `id=${id}`
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        alert('Game deleted successfully!');
-        location.reload();
-      } else {
-        alert('Error: ' + data.message);
-      }
-    });
-  }
-}
 </script>
+
+
 
 </body>
 </html>

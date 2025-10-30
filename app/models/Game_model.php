@@ -168,10 +168,15 @@ class Game_model {
         return ucwords($title);
     }
 
-    // ========== GAMBAR GAME ==========
-    public function getGameImage($title) {
+    // ✅ UPDATED: GAMBAR GAME dengan prioritas image_path
+    public function getGameImage($title, $image_path = null) {
+        // Priority 1: Gunakan image_path dari database jika ada
+        if (!empty($image_path)) {
+            return $image_path;
+        }
+        
+        // Priority 2: Fallback ke mapping lama untuk data existing
         $norm = strtolower(trim($title));
-
         $imageMapping = [
             'a space for the unbound' => 'ASTFU.jpg',
             'blasphemous 2' => 'bp2.jpg',
@@ -192,12 +197,14 @@ class Game_model {
             return $imageMapping[$norm];
         }
 
+        // Priority 3: Coba buat filename dari title
         $fileName = strtolower(str_replace(' ', '_', $title)) . '.jpg';
         $path = __DIR__ . '/../../public/assets/img/' . $fileName;
         if (file_exists($path)) {
             return $fileName;
         }
 
+        // Priority 4: Fallback ke default
         return 'default.jpg';
     }
 }

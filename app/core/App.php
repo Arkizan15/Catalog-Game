@@ -7,10 +7,10 @@ class App{
    public function __construct() {
     $url = $this->parseURL();
 
-    if ($url && file_exists('../app/controllers/' . $url[0] . '.php')) {
-        $this->controller = $url[0];
+    if ($url && file_exists('../app/controllers/' . ucfirst($url[0]) . '.php')) {
+        $this->controller = ucfirst($url[0]);
         unset($url[0]);
-        
+
     }
     require_once '../app/controllers/' . $this->controller . '.php';
     $this->controller = new $this->controller;
@@ -30,10 +30,27 @@ $this->params = array_values($url);
         
     
     public function parseURL(){
-        if(isset($_GET['url'])){
-            $url = rtrim($_GET['url'], '/');
+        if(isset($_SERVER['REQUEST_URI'])){
+            $url = $_SERVER['REQUEST_URI'];
+
+            // Remove query string if present
+            $url = strtok($url, '?');
+
+            // Remove base path if needed (assuming app is in subfolder)
+            $basePath = '/catalog-game'; // Adjust if different
+            if (strpos($url, $basePath) === 0) {
+                $url = substr($url, strlen($basePath));
+            }
+
+            $url = rtrim($url, '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode('/', $url);
+
+            // Remove empty first element if present
+            if (!empty($url) && $url[0] === '') {
+                array_shift($url);
+            }
+
             return $url;
         }
     }
