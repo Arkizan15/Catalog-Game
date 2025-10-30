@@ -1,0 +1,9 @@
+# Root .htaccess to redirect /catalog-game/ to /catalog-game/public/
+# Only if document root is not set to public/
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/catalog-game/?$
+RewriteRule ^(.*)$ /catalog-game/public/ [R=301,L]
+
+# If accessing /catalog-game/anything, redirect to /catalog-game/public/anything
+RewriteCond %{REQUEST_URI} ^/catalog-game/(.*)$
+RewriteRule ^(.*)$ /catalog-game/public/%1 [R=301,L]

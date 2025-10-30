@@ -36,11 +36,8 @@ $this->params = array_values($url);
             // Remove query string if present
             $url = strtok($url, '?');
 
-            // Remove base path if needed (assuming app is in subfolder)
-            $basePath = '/catalog-game'; // Adjust if different
-            if (strpos($url, $basePath) === 0) {
-                $url = substr($url, strlen($basePath));
-            }
+            // Since document root is public/, no need to remove base path
+            $basePath = ''; // Set to empty to not remove anything
 
             $url = rtrim($url, '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
